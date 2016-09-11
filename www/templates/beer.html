@@ -1,13 +1,26 @@
 <ion-view title="Beer" id="page3">
-    <ion-content padding="true" style="background: url(img/nG79wHyTQCHcEGmH5AvE_beer.jpg) no-repeat center;background-size:cover;" class="has-header">
-        <form id="beer-form1" class="list">
-            <label class="item item-input" name="Search-beer">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" placeholder="Search Beer Here">
-            </label>
-        </form>
-        <div>
-            <div></div>
+  <ion-content padding="true" style="background: url(img/nG79wHyTQCHcEGmH5AvE_beer.jpg) no-repeat center;background-size:cover;" class="has-header">
+    <form id="beer-form1" class="list">
+      <label class="item item-input" name="Search-beer">
+        <!--<i class="icon ion-search placeholder-icon"></i>-->
+        <input type="search" ng-model="beerName" placeholder="Search Beer Here">
+        <a class="button button-icon icon ion-search" ng-click="fetchBeer()"></a>
+      </label>
+    </form>
+    <div>
+      <div></div>
+    </div>
+    <div class="card">
+      <div class="item item-text-wrap">
+        <div class="item item-image">
+          <img src="https://s3.amazonaws.com/brewerydbapi/beer/oeGSxs/upload_FiPLQC-large.png">
+          <h2>Naughty 90</h2>
+          <p>Our Naughty 90 Oaked IPA was inspired by ocean bound, oak barreled brews of the 1800\u2019s. Packed with
+            hops on a 90-minute schedule, uniquely malted, then aged on a bed of oak, this IPA delivers a taste that is both innovative and timeless.</p>
         </div>
-    </ion-content>
+      </div>
+    </div>
+
+
+  </ion-content>
 </ion-view>
