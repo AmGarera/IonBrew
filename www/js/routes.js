@@ -7,8 +7,8 @@ angular.module('app.routes', ['ionicUIRouter'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
 
       .state('tabsController.home', {
     url: '/page2',
@@ -20,7 +20,7 @@ angular.module('app.routes', ['ionicUIRouter'])
     }
   })
 
-  /* 
+  /*
     The IonicUIRouter.js UI-Router Modification is being used for this route.
     To navigate to this route, do NOT use a URL. Instead use one of the following:
       1) Using the ui-sref HTML attribute:
@@ -41,8 +41,8 @@ angular.module('app.routes', ['ionicUIRouter'])
         controller: 'beerCtrl'
       },
       'tab3': {
-        templateUrl: 'templates/beer.html',
-        controller: 'beerCtrl'
+        templateUrl: 'templates/brewery.html',
+        controller: 'breweryCtrl'
       }
     }
   })
@@ -83,6 +83,6 @@ angular.module('app.routes', ['ionicUIRouter'])
 
 $urlRouterProvider.otherwise('/page1/page4')
 
-  
+
 
 });
