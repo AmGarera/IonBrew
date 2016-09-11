@@ -1,3 +1,19 @@
 <ion-view title="Home" id="page2">
-    <ion-content padding="true" class="has-header"></ion-content>
+    <ion-content padding="true" class="has-header">
+      This is a place holder ng-repeat for when the API works
+      <md-button class="btn1" ng-click="acceptOffer();"> Accept </md-button>
+      <!--This is a place holder ng-repeat for when the API works-->
+      <div class="list">
+
+        <a ng-repeat="item in items"
+           href="#/{{item.id}}"
+           class="item item-thumbnail-left">
+
+          <img ng-src="{{ item.image }}">
+          <h2>Hi {{ item.album }}</h2>
+          <h4>{{ item.artist }}</h4>
+        </a>
+
+      </div>
+    </ion-content>
 </ion-view>
