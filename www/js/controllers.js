@@ -17,7 +17,7 @@ angular.module('app.controllers', [])
       console.log("Inside Beer Controller");
 
       $scope.message = "Beer Tab";
-      $scope.beerName ;
+      $scope.beerName = "" ;
       console.log($scope.beerName);
 
       $scope.testFunction = function () {

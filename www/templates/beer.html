@@ -18,14 +18,17 @@
     <div>
       <div></div>
     </div>
-    <div class="card">
-      <div class="item item-text-wrap">
-        <div class="item item-image">
-          <img src="https://s3.amazonaws.com/brewerydbapi/beer/oeGSxs/upload_FiPLQC-large.png">
-          <h2>{{beer.name}}</h2>
-          <p>{{beer.about}}</p>
-        </div>
-      </div>
+    <div class="list">
+
+      <a ng-repeat="beer in beers"
+         href="#/{{beer.id}}"
+         class="beer beer-thumbnail-left">
+
+        <img ng-src="{{ beer.image }}">
+        <h2>Hi {{ beer.about }}</h2>
+        <h4>{{ beer.name }}</h4>
+      </a>
+
     </div>
 
 

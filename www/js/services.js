@@ -9,7 +9,8 @@ angular.module('app.services', [])
 
   .factory('BeerFactory', [function($http){
 
-    var getBeer = function (beerName) {
+    var getBeer;
+    getBeer = function (beerName) {
       console.log(beerName);
       $http({
         method: 'GET',
@@ -38,7 +39,7 @@ angular.module('app.services', [])
     var getBeer = function (beerName) {
       console.log(beerName);
       $http.get("http://api.brewerydb.com/v2/search?q=" + beerName + "&type=beer/?key=62335776d75e185980011577ab2440a4")
-        .then(function sucessBeer(response) {
+        .then(function successBeer(response) {
           return response.data;
         }, function errorCallBack(response) {
 
