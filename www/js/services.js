@@ -17,7 +17,8 @@ angular.module('app.services', [])
         url: '"http://api.brewerydb.com/v2/beer/oeGSxs/?key=62335776d75e185980011577ab2440a4"'
       })
         .then(function successBeer(response) {
-          return response.data;
+          $scope.beerResults = response.data;
+          console.log(response.data);
         }, function errorCallBack(response) {
 
         });
@@ -32,7 +33,7 @@ angular.module('app.services', [])
   .factory('BreweryFactory', [function(){
 
   }])
-
+  //Adrian we're using this this is how it needs to be structured but now we need to call it
   .service('BeerService', [function($http){
     // console.log(constant.apiUrl);
 
@@ -40,7 +41,8 @@ angular.module('app.services', [])
       console.log(beerName);
       $http.get("http://api.brewerydb.com/v2/search?q=" + beerName + "&type=beer/?key=62335776d75e185980011577ab2440a4")
         .then(function successBeer(response) {
-          return response.data;
+          $scope.beerResults = response.data;
+          console.log(response.data);
         }, function errorCallBack(response) {
 
         });

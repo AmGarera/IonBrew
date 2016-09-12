@@ -20,13 +20,13 @@
     </div>
     <div class="list">
 
-      <a ng-repeat="beer in beers"
+      <a ng-repeat="beerResults in beerCtrl"
          href="#/{{beer.id}}"
          class="beer beer-thumbnail-left">
 
         <img ng-src="{{ beer.image }}">
-        <h2>Hi {{ beer.about }}</h2>
-        <h4>{{ beer.name }}</h4>
+        <h2>Hi {{ beerResults.name }}</h2>
+        <h4>{{ beerResults.about }}</h4>
       </a>
 
     </div>

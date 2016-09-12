@@ -13,7 +13,7 @@ angular.module('app.controllers', [])
   .controller('beerCtrl', ["$scope",// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, BeerFactory) {
+    function ($scope, BeerService) {
       console.log("Inside Beer Controller");
 
       $scope.message = "Beer Tab";
@@ -28,8 +28,9 @@ angular.module('app.controllers', [])
       $scope.fetchBeer = function () {
         console.log("fetchBeer called");
         console.log($scope.beerName);
-        // BeerFactory.getBeer($scope.beerName)
-        //   .then(onBeer, onError)
+        BeerService.getBeer($scope.beerName)
+          .then(onBeer (response), onError)
+        $scope.beerResults = response.data;
       };
 
       var onBeer = function (data) {
