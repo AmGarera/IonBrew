@@ -1,40 +1,62 @@
 angular.module('app.controllers', [])
 
-app.constant('config', {
-  appNam: 'IonicBrew',
-  appVersion: "1.0",
-  apiUrl: "http://api.brewerydb.com/v2/?key=62335776d75e185980011577ab2440a4",
-  api_key: "62335776d75e185980011577ab2440a4"
-})
 
   .controller('homeCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function ($scope, $stateParams) {
+      console.log("Inside Home Controller");
 
 
     }])
 
-  .controller('beerCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('beerCtrl',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, BeerService) {
+    function ($scope, BeerFactory) {
+      console.log("Inside Beer Controller");
 
-      $scope.message = "Beer";
-      $scope.beerName = "";
+      $scope.message = "Beer Tab";
+      $scope.beerName = "test Data";
+      console.log($scope.beerName);
 
-      $scope.fetchBeer = function () {
-        console.log("fetchBeer called");
-        BeerService.getBeer($scope.beerName)
+      $scope.$watch('beerName', function () {
+        fetch();
+      });
+
+      function fetch() {
+
+        $scope.testFunction = function () {
+          console.log("Test Message");
+          console.log($scope.beerName)
+        };
+
+        $scope.fetchBeer = function () {
+          console.log("fetchBeer called");
+          console.log($scope.beerName);
+          // BeerFactory.getBeer($scope.beerName)
+          //   .then(onBeer, onError)
+        };
+
+      }
+
+      var onBeer = function (data) {
+          $scope.beer = data
+      };
+
+      var onError = function (reason) {
+        $scope.beerName = "Could not fetch beers"
       }
 
 
-    }])
+    })
 
   .controller('breweryCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function ($scope, $stateParams) {
+
+      console.log("Inside Brewery Controller");
 
 
     }])
@@ -43,6 +65,7 @@ app.constant('config', {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function ($scope, $stateParams) {
+      console.log("Inside Settings Controller");
 
 
     }])
