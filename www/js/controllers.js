@@ -31,14 +31,13 @@ angular.module('app.controllers', [])
         console.log("fetchBeer called");
         console.log($scope.beerName);
         BeerFactory.getBeer($scope.beerName)
-          .then(onBeer (response), onError)
-        $scope.beerResults = response.data;
+          .then(onBeer (data), onError)
       };
-
+      //Successful beer fetching
       var onBeer = function (data) {
           $scope.beer = data
       };
-
+      //Error that is thrown if beers couldn't be fetched.
       var onError = function (reason) {
         $scope.beerName = "Could not fetch beers"
       }
