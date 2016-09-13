@@ -20,11 +20,13 @@ angular.module('app.controllers', [])
       $scope.beerName = "" ;
       console.log($scope.beerName);
 
+      //Test function to make sure its calling the data from the textbox
       $scope.testFunction = function () {
         console.log("Test Message");
         console.log($scope.beerName)
       };
 
+      //Calls beer service and passes in the data from the textbox
       $scope.fetchBeer = function () {
         console.log("fetchBeer called");
         console.log($scope.beerName);
