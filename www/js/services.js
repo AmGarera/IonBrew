@@ -11,7 +11,8 @@ angular.module('app.services', [])
         method: 'GET',
         url: "https://api.brewerydb.com/v2/beer/oeGSxs/?key=62335776d75e185980011577ab2440a4"
       })
-        .then(function successBeer(response) {
+      .then(
+        function successBeer(response) {
           console.log(response.data);
           return response.data;
 

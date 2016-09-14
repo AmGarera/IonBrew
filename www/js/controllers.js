@@ -18,20 +18,21 @@ angular.module('app.controllers', [])
 
       $scope.message = "Beer Tab";
       $scope.beerName = "" ;
-      console.log($scope.beerName);
+      console.log($scope.beerNameSearch);
 
       //Test function to make sure its calling the data from the textbox
       $scope.testFunction = function () {
         console.log("Test Message");
-        console.log($scope.beerName)
+        console.log($scope.beerNameSearch)
       };
 
       //Calls beer service and passes in the data from the textbox
       $scope.fetchBeer = function () {
         console.log("fetchBeer called");
-        console.log($scope.beerName);
-        BeerFactory.getBeer($scope.beerName)
-          .then(onBeer (data), onError)
+        console.log($scope.beerNameSearch);
+        $scope.beer = BeerFactory.getBeer($scope.beerNameSearch)
+          // .then(onBeer (data), onError)
+        console.log($scope.beer);
       };
       //Successful beer fetching
       var onBeer = function (data) {
@@ -39,7 +40,7 @@ angular.module('app.controllers', [])
       };
       //Error that is thrown if beers couldn't be fetched.
       var onError = function (reason) {
-        $scope.beerName = "Could not fetch beers"
+        $scope.beerNameSearch = "Could not fetch beers"
       }
 
 

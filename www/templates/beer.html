@@ -6,7 +6,7 @@
         <div ng-controller="beerCtrl" class="item item-input-inset">
 
           <label class="item-input-wrapper">
-            <input type="text" ng-model="beerName" placeholder="Search for beer"/>
+            <input type="text" ng-model="beerNameSearch" placeholder="Search for beer"/>
           </label>
           <button ng-click="fetchBeer()" class="button button-small button-clear button-icon icon ion-search">
           </button>
@@ -18,15 +18,12 @@
     <div>
       <div></div>
     </div>
-    <div class="list">
+    <div class="beerList" ng-repeat="beer in beer">
 
-      <a ng-repeat="beerResults in beerCtrl"
-         href="#/{{beer.id}}"
-         class="beer beer-thumbnail-left">
-
+      <a class="item item-thumbnail-left" href="#">
         <img ng-src="{{ beer.image }}">
-        <h2>Hi {{ beerResults.name }}</h2>
-        <h4>{{ beerResults.about }}</h4>
+        <h2>Hi {{ beer.name }}</h2>
+        <p>{{ beer.description}}</p>
       </a>
 
     </div>
