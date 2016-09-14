@@ -15,32 +15,49 @@
 
       </div>
     </div>
-    <div>
-      <div></div>
-    </div>
-    <div class="beerList">
-      <a ng-repeat="item in beer" class="item item-thumbnail-left" href="#" >
-        <h2>Hi {{ item.id }}</h2>
-      </a>
+    <!--<div class="card">-->
+      <!--<div>{{beer}}</div>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<a ng-repeat="beers in beer" class="item item-thumbnail-left card" href="#" >-->
+        <!--<h2>{{beers.name}}</h2>-->
+      <!--</a>-->
 
-    </div>
-
-    <!--Sample code for NG-Repeate-->
-    <!--<div ng-init="list = ['one', 'two', 'three']">-->
-      <!--<ul>-->
-        <!--<li ng-repeat="item in list">-->
-          <!--{{item}}-->
-        <!--</li>-->
-      <!--</ul>-->
     <!--</div>-->
 
     <div>
       <ul>
-        <li collection-repeat="item in beer">
-          {{item.data.id}}
+        <li ng-repeat="beers in beer">
+          <div>
+            <a>{{beers.name}} {{beers.id}}</div>
         </li>
       </ul>
     </div>
+
+    <!--<div>-->
+      <!--<ion-list>-->
+        <!--<ion-item ng-repeat="beers in beer">-->
+          <!--{{beers.name}}-->
+        <!--</ion-item>-->
+      <!--</ion-list>-->
+    <!--</div>-->
+
+    <!--Sample code for NG-Repeate-->
+    <!--<div ng-init="list = ['one', 'two', 'three']">-->
+    <!--<ul>-->
+      <!--<li ng-repeat="item in list">-->
+        <!--{{item}}-->
+      <!--</li>-->
+    <!--</ul>-->
+  <!--</div>-->
+
+    <!--<div>-->
+      <!--<ul>-->
+        <!--<li collection-repeat="item in beer">-->
+          <!--{{item.data.id}}-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
 
 
   </ion-content>

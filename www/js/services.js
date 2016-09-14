@@ -2,8 +2,9 @@ angular.module('app.services', [])
 
 
   .factory('BeerFactory', ['$http', function($http){
-    console.log("Opened BeerFactory")
+    console.log("Opened BeerFactory");
     var getBeer;
+
     getBeer = function (beerName) {
       console.log("getBeer Called");
       console.log(beerName);
@@ -31,24 +32,39 @@ angular.module('app.services', [])
 
   }])
   //Adrian we're using this this is how it needs to be structured but now we need to call it
-  .service('BeerService', [function($http){
+  .service('BeerService', ['$http', function($http){
     // console.log(constant.apiUrl);
 
-    var getBeer = function (beerName) {
-      console.log("get beer" + beerName);
-      $http.get("http://api.brewerydb.com/v2/search?q=" + beerName + "&type=beer/?key=62335776d75e185980011577ab2440a4")
-        .then(function successBeer(response) {
-          console.log("sucessBeer Calles")
-          $scope.beerResults = response.data;
+    this.getBeer = function (beerName) {
+      console.log("get beer " + beerName);
+      $http({
+        method: 'GET',
+        url: "https://api.brewerydb.com/v2/beer/oeGSxs/?key=62335776d75e185980011577ab2440a4"
+      })
+        .then(function (response) {
+          console.log("sucessBeer Call");
           console.log(response.data);
-        }, function errorCallBack(response) {
-
+          return response.data;
         });
+      console.log("beerName = " + beerName);
+      console.log("data = " + response);
     };
 
-    return {
-      getBeer: getBeer
-    }
+    // var getBeer = function (beerName) {
+    //   console.log("get beer" + beerName);
+    //   $http.get("https://api.brewerydb.com/v2/beer/oeGSxs/?key=62335776d75e185980011577ab2440a4")
+    //     .then(function successBeer(response) {
+    //       console.log("sucessBeer Calles")
+    //       $scope.beerResults = response.data;
+    //       console.log(response.data);
+    //     }, function errorCallBack(response) {
+    //
+    //     });
+    // };
+    //
+    // return {
+    //   getBeer: getBeer
+    // }
 
 
 
@@ -56,4 +72,23 @@ angular.module('app.services', [])
 
   .service('BreweryService', [function(){
 
+  }])
+
+  .factory('TestingFactory', ['$http', function($http){
+    console.log("Testing Factory Called");
+
+    var url = 'https://api.brewerydb.com/v2/search?q=';
+    var testFactory = {};
+    var apiKey = '/?key=62335776d75e185980011577ab2440a4';
+
+    testFactory.getBeer = function (beerNameSearch) {
+      return $http.get(url + beerNameSearch + '&type=beer' + '/?key=62335776d75e185980011577ab2440a4');
+    };
+
+    // testFactory.actuallyGetBeer = function () {
+    //   return testFactory.data
+    // }
+
+    console.log(testFactory);
+    return testFactory;
   }]);

@@ -10,30 +10,60 @@ angular.module('app.controllers', [])
 
     }])
 
-  .controller('beerCtrl', ["$scope", "BeerFactory",// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory",// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, BeerFactory) {
+    function ($scope, BeerFactory, BeerService, TestingFactory) {
       console.log("Inside Beer Controller");
 
-      $scope.message = "Beer Tab";
-      $scope.beerName = "" ;
-      console.log($scope.beerNameSearch);
+      // function getBeers() {
+      //   TestingFactory.getBeer($scope.beerNameSearch)
+      //     .then(function (response) {
+      //       $scope.beer = response.data;
+      //       console.log(response.data.data);
+      //     }, function (error) {
+      //       $scope.status = "Unable to Load " + error.message;
+      //       }
+      //     )
+      //
+      // }
 
-      //Test function to make sure its calling the data from the textbox
-      $scope.testFunction = function () {
-        console.log("Test Message");
-        console.log($scope.beerNameSearch)
-      };
-
+      // //Test function to make sure its calling the data from the textbox
+      // $scope.testFunction = function () {
+      //   console.log("Test Message");
+      //   console.log($scope.beerNameSearch)
+      // };
+      //
       //Calls beer service and passes in the data from the textbox
       $scope.fetchBeer = function () {
-        console.log("fetchBeer called");
-        console.log($scope.beerNameSearch);
-        $scope.beer = BeerFactory.getBeer($scope.beerNameSearch)
-          // .then(onBeer (data), onError)
-        // console.log($scope.beer);
+        $scope.beerNameSearch;
+        console.log("BeerNameSearch = "  + $scope.beerNameSearch);
+
+        getBeers();
+
+        function getBeers() {
+          TestingFactory.getBeer($scope.beerNameSearch)
+            .then(function (response) {
+                $scope.beer = response.data;
+                console.log(response.data.data);
+              }, function (error) {
+                $scope.status = "Unable to Load " + error.message;
+              }
+            )
+
+        }
       };
+      // $scope.fetchBeer = function () {
+      //   console.log("fetchBeer called")
+      //   BeerService.getBeer($scope.beerNameSearch,
+      //     function(data) {
+      //     console.log("BeerService.getBeer Called");
+      //       console.log(data);
+      //       $scope.beer = data;
+      //       console.log($scope.beer);
+      //   })
+      // };
+
       //Successful beer fetching
       var onBeer = function (data) {
           $scope.beer = data
