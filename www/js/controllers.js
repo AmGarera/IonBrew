@@ -32,7 +32,7 @@ angular.module('app.controllers', [])
         console.log($scope.beerNameSearch);
         $scope.beer = BeerFactory.getBeer($scope.beerNameSearch)
           // .then(onBeer (data), onError)
-        console.log($scope.beer);
+        // console.log($scope.beer);
       };
       //Successful beer fetching
       var onBeer = function (data) {

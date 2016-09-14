@@ -18,14 +18,28 @@
     <div>
       <div></div>
     </div>
-    <div class="beerList" ng-repeat="beer in beer">
-
-      <a class="item item-thumbnail-left" href="#">
-        <img ng-src="{{ beer.image }}">
-        <h2>Hi {{ beer.name }}</h2>
-        <p>{{ beer.description}}</p>
+    <div class="beerList">
+      <a ng-repeat="item in beer" class="item item-thumbnail-left" href="#" >
+        <h2>Hi {{ item.id }}</h2>
       </a>
 
+    </div>
+
+    <!--Sample code for NG-Repeate-->
+    <!--<div ng-init="list = ['one', 'two', 'three']">-->
+      <!--<ul>-->
+        <!--<li ng-repeat="item in list">-->
+          <!--{{item}}-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+
+    <div>
+      <ul>
+        <li collection-repeat="item in beer">
+          {{item.data.id}}
+        </li>
+      </ul>
     </div>
 
 
