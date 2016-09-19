@@ -1,76 +1,59 @@
 <ion-view title="Beer" id="page3">
   <ion-content padding="true" style="background: url(img/nG79wHyTQCHcEGmH5AvE_beer.jpg) no-repeat center;background-size:cover;" class="has-header">
-    <div class="card">
-      <div class="list">
+      <!--<div class="list">-->
 
         <div ng-controller="beerCtrl">
-<div class="item item-input-inset">
+          <div class="card">
+          <div class="item item-input-inset">
           <label class="item-input-wrapper">
             <input type="text" ng-model="beerNameSearch" placeholder="Search for beer"/>
           </label>
           <button ng-click="fetchBeer()" class="button button-small button-clear button-icon icon ion-search">
           </button>
-</div>
-          <div class="list card" ng-show="beer">
-          <ion-list ng-show="beer">
-            <ion-item ng-show="beer" ng-repeat="beers in beer">
-            <img ng-src="{{beers.labels.icon}}"><img>
-          <span ng-bind="beers.name">
-          </span>
-            </ion-item>
-          </ion-list>
+          </div>
             </div>
 
+
+          <!--Card List-->
+          <div class="card" ng-show="beer">
+
+            <div class="item item-text-wrap" ng-repeat="beers in beer">
+              <img ng-src="{{beers.labels.icon}}"><img>
+              <h2 ng-bind="beers.name"></h2>
+              <p ng-bind="beers.description"></p>
+              <div class="item item-divider">
+                <button class="button button-clear icon-left ion-star button-positive">Favorite</button>
+              </div>
+            </div>
+
+            <!--<a class="item item-thumbnail-left item-text-wrap" href="#" ng-repeat="beers in beer">-->
+              <!--<img ng-src="{{beers.labels.icon}}"><img>-->
+              <!--<h2 ng-bind="beers.name"></h2>-->
+              <!--<p ng-bind="beers.description"></p>-->
+              <!--<div class="item item-divider">-->
+                <!--<button class="button button-clear icon-left ion-star button-positive">Favorite</button>-->
+              <!--</div>-->
+            <!--</a>-->
+
+          </div>
+
+          <!--List-->
+          <!--<div class="list card" ng-show="beer">-->
+          <!--<ion-list ng-show="beer">-->
+            <!--<ion-item ng-show="beer" ng-repeat="beers in beer">-->
+            <!--<img ng-src="{{beers.labels.icon}}"><img>-->
+          <!--<span ng-bind="beers.name">-->
+          <!--</span>-->
+            <!--</ion-item>-->
+          <!--</ion-list>-->
+            <!--</div>-->
+
           <!--{{beerName}}-->
-        </div>
+        <!--</div>-->
 
-      </div>
-    </div>
-    <!--<div class="card">-->
-      <!--<div>{{beer.name}}</div>-->
-    <!--</div>-->
-    <!--<div>-->
-      <!--<a ng-repeat="beers in beer" class="item item-thumbnail-left card" href="#" >-->
-        <!--<h2>{{beers.name}}</h2>-->
-      <!--</a>-->
-
-    <!--</div>-->
-
-
-
-    <div>
-    <ion-list>
-    <ion-item ng-repeat="beers in beer">
-          <span ng-bind="beers.id">
-          </span>
-        </ion-item>
-      </ion-list>
+      <!--</div>-->
     </div>
 
-    <!--<div>-->
-      <!--<ion-list>-->
-        <!--<ion-item ng-repeat="beers in beer">-->
-          <!--{{beers.name}}-->
-        <!--</ion-item>-->
-      <!--</ion-list>-->
-    <!--</div>-->
-
-    <!--Sample code for NG-Repeate-->
-    <!--<div ng-init="list = ['one', 'two', 'three']">-->
-    <!--<ul>-->
-      <!--<li ng-repeat="item in list">-->
-        <!--{{item}}-->
-      <!--</li>-->
-    <!--</ul>-->
-  <!--</div>-->
-
-    <!--<div>-->
-      <!--<ul>-->
-        <!--<li collection-repeat="item in beer">-->
-          <!--{{item.data.id}}-->
-        <!--</li>-->
-      <!--</ul>-->
-    <!--</div>-->
 
 
   </ion-content>
