@@ -11,9 +11,9 @@
           <button ng-click="fetchBeer()" class="button button-small button-clear button-icon icon ion-search">
           </button>
 </div>
-          <div class="list card">
-          <ion-list>
-            <ion-item ng-repeat="beers in beer">
+          <div class="list card" ng-show="beer">
+          <ion-list ng-show="beer">
+            <ion-item ng-show="beer" ng-repeat="beers in beer">
             <img ng-src="{{beers.labels.icon}}"><img>
           <span ng-bind="beers.name">
           </span>
