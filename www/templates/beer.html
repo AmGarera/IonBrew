@@ -15,17 +15,20 @@
 
 
           <!--Card List-->
-          <div class="card" ng-show="beer">
+          <div class="list" ng-show="beer">
 
-            <div class="item item-text-wrap" ng-repeat="beers in beer">
-              <img ng-src="{{beers.labels.icon}}"><img>
-              <h2 ng-bind="beers.name"></h2>
-              <p ng-bind="beers.description"></p>
-              <div class="item item-divider">
-                <button class="button button-clear icon-left ion-star button-positive">Favorite</button>
+            <div class="card" ng-repeat="beers in beer">
+              <div class="item item-text-wrap item-avatar">
+                <img ng-src="{{beers.labels.icon}}"><img>
+                <h2 ng-bind="beers.name"></h2>
+                <p ng-bind="beers.description"></p>
+                <div class="item item-divider">
+                  <button class="button button-clear icon-left ion-star button-positive">Favorite</button>
+                </div>
               </div>
             </div>
 
+            <!--Working code, do not delete. Saving for backup-->
             <!--<a class="item item-thumbnail-left item-text-wrap" href="#" ng-repeat="beers in beer">-->
               <!--<img ng-src="{{beers.labels.icon}}"><img>-->
               <!--<h2 ng-bind="beers.name"></h2>-->
@@ -37,21 +40,6 @@
 
           </div>
 
-          <!--List-->
-          <!--<div class="list card" ng-show="beer">-->
-          <!--<ion-list ng-show="beer">-->
-            <!--<ion-item ng-show="beer" ng-repeat="beers in beer">-->
-            <!--<img ng-src="{{beers.labels.icon}}"><img>-->
-          <!--<span ng-bind="beers.name">-->
-          <!--</span>-->
-            <!--</ion-item>-->
-          <!--</ion-list>-->
-            <!--</div>-->
-
-          <!--{{beerName}}-->
-        <!--</div>-->
-
-      <!--</div>-->
     </div>
 
 
