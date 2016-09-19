@@ -74,15 +74,19 @@ angular.module('app.services', [])
 
   }])
 
-  .factory('TestingFactory', ['$http', function($http){
+  .factory('TestingFactory', ['$http', function($http, $scope){
     console.log("Testing Factory Called");
+     var beer =  [];
     //Variables for Beer Search to simplify the code.
     var url = 'https://api.brewerydb.com/v2/search?';
     var testFactory = {};
     var apiKey = 'key=62335776d75e185980011577ab2440a4';
     //Search call to the API
     testFactory.getBeer = function (beerNameSearch) {
-      return $http.get(url  + apiKey + '&q=' + beerNameSearch + '&type=beer');
+      return $http.get(url  + apiKey + '&q=' + beerNameSearch + '&type=beer').success(function (data) {
+
+        }
+      );
     };
 
     // testFactory.actuallyGetBeer = function () {

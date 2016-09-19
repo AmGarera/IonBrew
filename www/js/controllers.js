@@ -42,10 +42,16 @@ angular.module('app.controllers', [])
         getBeers();
 
         function getBeers() {
+          $scope.beer = {};
           TestingFactory.getBeer($scope.beerNameSearch)
-            .then(function (response) {
-                $scope.beer = response.data;
-                console.log(response.data.data);
+
+            .then( function (response) {
+              $scope.beer = response.data.data;
+              var beerData= response.data.data;
+              console.log($scope.beerNameSearch)
+                console.log($scope.beer);
+                console.log($scope.beer.id);
+                // onBeer(beerData)
               }, function (error) {
                 $scope.status = "Unable to Load " + error.message;
               }
@@ -53,25 +59,21 @@ angular.module('app.controllers', [])
 
         }
       };
-      // $scope.fetchBeer = function () {
-      //   console.log("fetchBeer called")
-      //   BeerService.getBeer($scope.beerNameSearch,
-      //     function(data) {
-      //     console.log("BeerService.getBeer Called");
-      //       console.log(data);
-      //       $scope.beer = data;
-      //       console.log($scope.beer);
-      //   })
-      // };
 
       //Successful beer fetching
-      var onBeer = function (data) {
-          $scope.beer = data
-      };
+      // var onBeer = function (data) {
+      //   console.log("Called onBeer");
+      //   $scope.beer = (
+      //      angular.toJson(data)
+      //   );
+      //
+      //   console.log($scope.beer)
+      // };
       //Error that is thrown if beers couldn't be fetched.
       var onError = function (reason) {
         $scope.beerNameSearch = "Could not fetch beers"
       }
+
 
 
     }])
