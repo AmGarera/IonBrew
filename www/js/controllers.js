@@ -38,12 +38,13 @@ angular.module('app.controllers', [])
       $scope.fetchBeer = function () {
         $scope.beerNameSearch;
         console.log("BeerNameSearch = "  + $scope.beerNameSearch);
+        type = 'beer';
 
         getBeers();
 
         function getBeers() {
           $scope.beer = {};
-          TestingFactory.getBeer($scope.beerNameSearch)
+          TestingFactory.getBrews($scope.beerNameSearch, type)
 
             .then( function (response) {
               $scope.beer = response.data.data;
@@ -78,12 +79,35 @@ angular.module('app.controllers', [])
 
     }])
 
-  .controller('breweryCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('breweryCtrl', ['$scope', '$stateParams', "TestingFactory", // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams) {
+    function ($scope, $stateParams, TestingFactory) {
 
       console.log("Inside Brewery Controller");
+
+      $scope.fetchBrews = function () {
+        $scope.brewNameSearch;
+        console.log("BrewNameSearch = "  + $scope.brewNameSearch);
+
+        getBeers();
+
+        function getBeers() {
+          type = 'brewery';
+          $scope.brew = {};
+          TestingFactory.getBrews($scope.brewNameSearch, type)
+
+            .then( function (response) {
+                $scope.brew = response.data.data;
+                var brewData= response.data.data;
+                console.log($scope.brew);
+              }, function (error) {
+                $scope.status = "Unable to Load " + error.message;
+              }
+            )
+
+        }
+      };
 
 
     }])

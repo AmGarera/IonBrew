@@ -1,13 +1,50 @@
 <ion-view title="Brewery" id="page7">
     <ion-content padding="true" style="background: url(img/acpgZJRSHyWpthjRdXxS_brewery.jpg) no-repeat center;background-size:cover;" class="has-header">
+      <div ng-controller="breweryCtrl">
         <form id="brewery-form4" class="list">
-            <label class="item item-input" name="Search-brewery">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" placeholder="Search Brewery Here">
-            </label>
+
+          <div class="card">
+            <div class="item item-input-inset">
+              <label class="item-input-wrapper">
+                <input type="text" ng-model="brewNameSearch" placeholder="Search for beer"/>
+              </label>
+              <button ng-click="fetchBrews()" class="button button-small button-clear button-icon icon ion-search">
+              </button>
+            </div>
+          </div>
+
         </form>
         <div>
-            <div></div>
+          <!--Card List-->
+          <div class="list" ng-show="brew">
+
+            <!--Card Info-->
+            <div class="card" ng-repeat="brews in brew">
+              <div class="item item-text-wrap item-avatar">
+                <img ng-src="{{brews.images.icon || '../img/acpgZJRSHyWpthjRdXxS_brewery.jpg'}}"><img>
+                <h2 ng-bind="brews.name"></h2>
+                <p ng-bind="brews.description || 'No Descrption Avalible'"></p>
+              </div>
+
+              <!--Card Footer-->
+              <div class="item">
+                <button class="button button-clear subdued icon-left ion-star button-positive col col-50 ">Save</button>
+                <button class="button button-clear subdued icon-left ion-information-circled button-positive col col-50 ">About</button>
+              </div>
+            </div>
+
+            <!--Working code, do not delete. Saving for backup-->
+            <!--<a class="item item-thumbnail-left item-text-wrap" href="#" ng-repeat="beers in beer">-->
+            <!--<img ng-src="{{beers.labels.icon}}"><img>-->
+            <!--<h2 ng-bind="beers.name"></h2>-->
+            <!--<p ng-bind="beers.description"></p>-->
+            <!--<div class="item item-divider">-->
+            <!--<button class="button button-clear icon-left ion-star button-positive">Favorite</button>-->
+            <!--</div>-->
+            <!--</a>-->
+
+          </div>
         </div>
+      </div>
     </ion-content>
 </ion-view>

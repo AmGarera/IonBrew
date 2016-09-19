@@ -22,7 +22,7 @@
               <div class="item item-text-wrap item-avatar">
                 <img ng-src="{{beers.labels.icon || '../img/7qapHuCjQEu86GfUmJZE_beer.jpg'}}"><img>
                 <h2 ng-bind="beers.name"></h2>
-                <p ng-bind="beers.description"></p>
+                <p ng-bind="beers.description || 'No Descrption Avalible'"></p>
               </div>
 
               <!--Card Footer-->

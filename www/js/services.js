@@ -82,8 +82,8 @@ angular.module('app.services', [])
     var testFactory = {};
     var apiKey = 'key=62335776d75e185980011577ab2440a4';
     //Search call to the API
-    testFactory.getBeer = function (beerNameSearch) {
-      return $http.get(url  + apiKey + '&q=' + beerNameSearch + '&type=beer').success(function (data) {
+    testFactory.getBrews = function (brewNameSearch, type) {
+      return $http.get(url  + apiKey + '&q=' + brewNameSearch + '&type=' + type).success(function (data) {
 
         }
       );
