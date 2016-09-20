@@ -11,3 +11,20 @@
   border: none;
   outline: none;
 }
+
+.roundedCorners {
+  border-radius: 20px;
+}
+
+.search {
+  border-radius: 25px;
+}
+
+.search-text {
+  border-radius: 25px;
+}
+
+.search-button {
+  padding--right: 0px;
+
+}

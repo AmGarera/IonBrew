@@ -3,22 +3,41 @@
       <!--<div class="list">-->
 
         <div ng-controller="beerCtrl">
-          <div class="card">
-          <div class="item item-input-inset">
-          <label class="item-input-wrapper">
-            <input type="text" ng-model="beerNameSearch" placeholder="Search for beer"/>
-          </label>
-          <button ng-click="fetchBeer()" class="button button-small button-clear button-icon icon ion-search">
-          </button>
+
+          <!--Working Search-->
+          <div class="card roundedCorners">
+            <div class="item item-input-inset">
+              <label class="item-input-wrapper">
+                <input type="text" ng-model="beerNameSearch" placeholder="Search for beer"/>
+              </label>
+              <button class="button button-royal button-fab">
+                <i class="icon ion-search"></i>
+              </button>
+          <!--<button ng-click="fetchBeer()" class="button button-small button-clear button-icon icon ion-search">-->
+          <!--</button>-->
           </div>
+          </div>
+
+          <!--Testing Search-->
+          <div class="bar search" style="position: static">
+            <div class="row">
+              <div class="title search-text">
+                <input class="row-center" type="text" ng-model="beerNameSearch" placeholder="Search for beer"/>
+              </div>
+              <div class="buttons row-center">
+                <button ng-click="fetchBeer()" class="button button-royal button-fab col-offset-90">
+                  <i class="icon ion-search"></i>
+                </button>
+              </div>
             </div>
+          </div>
 
 
           <!--Card List-->
           <div class="list" ng-show="beer">
 
             <!--Card Info-->
-            <div class="card" ng-repeat="beers in beer">
+            <div class="card roundedCorners" ng-repeat="beers in beer">
               <div class="item item-text-wrap item-avatar">
                 <img ng-src="{{beers.labels.icon || '../img/7qapHuCjQEu86GfUmJZE_beer.jpg'}}"><img>
                 <h2 ng-bind="beers.name"></h2>
@@ -27,8 +46,8 @@
 
               <!--Card Footer-->
               <div class="item">
-                <button class="button icon-left ion-bookmark button-calm-900 button-raised ">Save</button>
-                <button class="button button-royal-900 subdued icon-left ion-ios-information-outline button-raised col col-50 ">About</button>
+                <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50">Save</button>
+                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50 ">About</button>
               </div>
             </div>
 
