@@ -41,11 +41,11 @@ angular.module('app.controllers', [])
         type = 'beer';
 
         $ionicLoading.show({
-          template: '<ion-spinner></ion-spinner>',
-          animation: 'fade-in',
-          showBackdrop: true,
-          maxWidth: 500,
-          showDelay: 100
+          template: '<ion-spinner icon="android"></ion-spinner>',
+          // animation: 'fade-in',
+          showBackdrop: true
+          // maxWidth: 500
+          // showDelay: 100
         });
 
         getBeers();

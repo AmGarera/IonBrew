@@ -5,16 +5,16 @@
         <div ng-controller="beerCtrl">
 
           <!--Working Search-->
-          <div>
+          <form ng-submit="fetchBeer()">
             <div class="item item-input-inset search" style="border: hidden">
               <label class="item-input-wrapper search-text" style="background-color: white">
                 <input type="text" ng-model="beerNameSearch" placeholder="Search for beer"/>
               </label>
-              <button ng-click="fetchBeer()" class="button button-royal button-fab search-button">
+              <button class="button button-royal button-fab search-button">
                 <i class="icon ion-search"></i>
               </button>
           </div>
-          </div>
+          </form>
 
           <!--<div ng-hide="beer" class="text-center">-->
             <!--<ion-spinner icon="android"></ion-spinner>-->

@@ -34,11 +34,7 @@
 .spinner svg {
   width: 40px;
   height: 40px;
-  stroke: #444;
+  stroke: #009688;
   fill: #FFFFFF;
 }
 
-.spinner-card {
-  border-radius: 50%;
-  width: 46px;
-}
