@@ -35,7 +35,7 @@
               <!--Card Footer-->
               <div class="item">
                 <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50">Save</button>
-                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50 ">About</button>
+                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(beers.id)">About</button>
               </div>
             </div>
 
@@ -48,12 +48,33 @@
                 <!--<button class="button button-clear icon-left ion-star button-positive">Favorite</button>-->
               <!--</div>-->
             <!--</a>-->
-
           </div>
 
+      <script id="single-beer.html" type="text/ng-template">
+        <ion-modal-view>
+          <ion-content>
+            <button class="button button-clear button-assertive" ng-click="closeModal()">
+              Close
+            </button>
+
+            <div class="item item-avatar">
+            <img ng-src="{{singlebeer.labels.icon || '../img/7qapHuCjQEu86GfUmJZE_beer.jpg'}}">
+            <h2>{{singlebeer.name}}</h2>
+              <p ng-show="singlebeer.abv">Alcohol Percent By Volume: {{singlebeer.abv}}%</p>
+              <p ng-show="singlebeer.style.name"> Style: {{singlebeer.style.name}}</p>
+            </div>
+
+            <div class="item item-body">
+              <img class="full-image" ng-show="singlebeer.labels.medium" ng-src="{{singlebeer.labels.medium}}">
+              <p>
+                {{singlebeer.description}}
+              </p>
+            </div>
+
+
+          </ion-content>
+        </ion-modal-view>
+      </script>
     </div>
-
-
-
   </ion-content>
 </ion-view>

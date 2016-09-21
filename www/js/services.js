@@ -78,17 +78,23 @@ angular.module('app.services', [])
     console.log("Testing Factory Called");
      var beer =  [];
     //Variables for Beer Search to simplify the code.
-    var url = 'https://api.brewerydb.com/v2/search?';
+    var url = 'https://api.brewerydb.com/v2/';
+    var search = 'search?';
     var testFactory = {};
     var apiKey = 'key=62335776d75e185980011577ab2440a4';
     //Search call to the API
     testFactory.getBrews = function (brewNameSearch, type) {
-      return $http.get(url  + apiKey + '&q=' + brewNameSearch + '&type=' + type).success(function (data) {
-
+      return $http.get(url + search + apiKey + '&q=' + brewNameSearch + '&type=' + type).success(function (data) {
         }
       );
     };
 
+    testFactory.getSingleBrew = function (brewNameSearch, type) {
+      console.log("getUrl = " + url + type + "/" + brewNameSearch + "/?" +  apiKey );
+      return $http.get(url + type + "/" + brewNameSearch + "/?" +  apiKey).success(function (data) {
+        }
+      );
+    };
     // testFactory.actuallyGetBeer = function () {
     //   return testFactory.data
     // }
