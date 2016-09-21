@@ -18,13 +18,27 @@
 
 .search {
   border-radius: 25px;
+  padding: 20px;
 }
 
 .search-text {
-  border-radius: 25px;
+  z-index: 1;
 }
 
 .search-button {
-  padding--right: 0px;
+  position: absolute;
+  z-index: 2;
+  right: 0px;
+}
 
+.spinner svg {
+  width: 40px;
+  height: 40px;
+  stroke: #444;
+  fill: #FFFFFF;
+}
+
+.spinner-card {
+  border-radius: 50%;
+  width: 46px;
 }

@@ -5,32 +5,20 @@
         <div ng-controller="beerCtrl">
 
           <!--Working Search-->
-          <div class="card roundedCorners">
-            <div class="item item-input-inset">
-              <label class="item-input-wrapper">
+          <div>
+            <div class="item item-input-inset search" style="border: hidden">
+              <label class="item-input-wrapper search-text" style="background-color: white">
                 <input type="text" ng-model="beerNameSearch" placeholder="Search for beer"/>
               </label>
-              <button class="button button-royal button-fab">
+              <button ng-click="fetchBeer()" class="button button-royal button-fab search-button">
                 <i class="icon ion-search"></i>
               </button>
-          <!--<button ng-click="fetchBeer()" class="button button-small button-clear button-icon icon ion-search">-->
-          <!--</button>-->
           </div>
           </div>
 
-          <!--Testing Search-->
-          <div class="bar search" style="position: static">
-            <div class="row">
-              <div class="title search-text">
-                <input class="row-center" type="text" ng-model="beerNameSearch" placeholder="Search for beer"/>
-              </div>
-              <div class="buttons row-center">
-                <button ng-click="fetchBeer()" class="button button-royal button-fab col-offset-90">
-                  <i class="icon ion-search"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+          <!--<div ng-hide="beer" class="text-center">-->
+            <!--<ion-spinner icon="android"></ion-spinner>-->
+          <!--</div>-->
 
 
           <!--Card List-->
