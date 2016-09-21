@@ -74,12 +74,23 @@
                 <div class="title">Menu</div>
             </ion-header-bar>
             <ion-content padding="false" class="side-menu-left has-header ">
-              <ul class="list">
-                <li class="item">Home</li>
-                <li class="item">Beers</li>
-                <li class="item">Brewery's</li>
-                <li class="item">Settings</li>
-              </ul>
+              <ion-list>
+                <!--<ion-item menu-close ng-click="login()">-->
+                  <!--Login-->
+                <!--</ion-item>-->
+                <ion-item menu-close href="#/page1/page2"">
+                  Home
+                </ion-item>
+                <ion-item menu-close href="#/page1/tab2/page3">
+                  Beers
+                </ion-item>
+                <ion-item menu-close href="#/page1/tab3/page3">
+                  Brewery
+                </ion-item>
+                <ion-item menu-close href="#/page1/page4">
+                  Settings
+                </ion-item>
+              </ion-list>
             </ion-content>
         </ion-side-menu>
     </ion-side-menus>
