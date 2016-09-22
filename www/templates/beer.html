@@ -27,7 +27,7 @@
             <!--Card Info-->
             <div class="card roundedCorners" ng-repeat="beers in beer">
               <div class="item item-text-wrap item-avatar">
-                <img ng-src="{{beers.labels.icon || '../img/7qapHuCjQEu86GfUmJZE_beer.jpg'}}"><img>
+                <img ng-src="{{beers.labels.icon || '../img/noImageFound.png'}}"><img>
                 <h2 ng-bind="beers.name"></h2>
                 <p ng-bind="beers.description || 'No Description Available'"></p>
               </div>
@@ -58,7 +58,7 @@
             </button>
 
             <div class="item item-avatar">
-            <img ng-src="{{singlebeer.labels.icon || '../img/7qapHuCjQEu86GfUmJZE_beer.jpg'}}">
+            <img ng-src="{{singlebeer.labels.icon || '../img/noImageFound.png'}}">
             <h2>{{singlebeer.name}}</h2>
               <p ng-show="singlebeer.abv">Alcohol Percent By Volume: {{singlebeer.abv}}%</p>
               <p ng-show="singlebeer.style.name"> Style: {{singlebeer.style.name}}</p>
