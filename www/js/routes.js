@@ -8,81 +8,27 @@ angular.module('app.routes', ['ionicUIRouter'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+    .state('Homepage', {
+        url: "/Homepage",
+        templateUrl: "templates/home.html",
+        controller: "homeCtrl"
+    })
+    .state('Beer', {
+        url: "/Beer",
+        templateUrl: "templates/beer.html",
+        controller: "beerCtrl"
+    })
+    .state("Brewery", {
+      url: "/Brewery",
+      templateUrl: "templates/brewery.html",
+      controller: "breweryCtrl"
+    })
+    .state("Settings", {
+      url: "/Settings",
+      templateUrl: "templates/settings.html",
+      controller: "settingsCtrl"
+    });
 
-
-      .state('tabsController.home', {
-    url: '/page2',
-    views: {
-      'tab1': {
-        templateUrl: 'templates/home.html',
-        controller: 'homeCtrl'
-      }
-    }
-  })
-
-  /*
-    The IonicUIRouter.js UI-Router Modification is being used for this route.
-    To navigate to this route, do NOT use a URL. Instead use one of the following:
-      1) Using the ui-sref HTML attribute:
-        ui-sref='tabsController.beer'
-      2) Using $state.go programatically:
-        $state.go('tabsController.beer');
-    This allows your app to figure out which Tab to open this page in on the fly.
-    If you're setting a Tabs default page or modifying the .otherwise for your app and
-    must use a URL, use one of the following:
-      /page1/tab2/page3
-      /page1/tab3/page3
-  */
-  .state('tabsController.beer', {
-    url: '/page3',
-    views: {
-      'tab2': {
-        templateUrl: 'templates/beer.html',
-        controller: 'beerCtrl'
-      },
-      'tab3': {
-        templateUrl: 'templates/brewery.html',
-        controller: 'breweryCtrl'
-      }
-    }
-  })
-
-  .state('brewery', {
-    url: '/page7',
-    templateUrl: 'templates/brewery.html',
-    controller: 'breweryCtrl'
-  })
-
-  .state('tabsController.settings', {
-    url: '/page4',
-    views: {
-      'tab4': {
-        templateUrl: 'templates/settings.html',
-        controller: 'settingsCtrl'
-      }
-    }
-  })
-
-  .state('tabsController', {
-    url: '/page1',
-    templateUrl: 'templates/tabsController.html',
-    abstract:true
-  })
-
-  .state('login', {
-    url: '/page5',
-    templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
-  })
-
-  .state('signup', {
-    url: '/page6',
-    templateUrl: 'templates/signup.html',
-    controller: 'signupCtrl'
-  })
-
-$urlRouterProvider.otherwise('/page1/page4')
-
-
+  $urlRouterProvider.otherwise('/Homepage')
 
 });

@@ -90,7 +90,7 @@ angular.module('app.services', [])
     };
 
     testFactory.getSingleBrew = function (brewNameSearch, type) {
-      console.log("getUrl = " + url + type + "/" + brewNameSearch + "/?" +  apiKey );
+      //console.log("getUrl = " + url + type + "/" + brewNameSearch + "/?" +  apiKey );
       return $http.get(url + type + "/" + brewNameSearch + "/?" +  apiKey).success(function (data) {
         }
       );
