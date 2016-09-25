@@ -61,16 +61,16 @@
   <div>
     <ion-side-menus enable-menu-with-back-views="false" data-componentid="side-menu21">
         <ion-side-menu-content>
-            <ion-nav-bar class="bar-stable">
-                <ion-nav-back-button></ion-nav-back-button>
+            <ion-nav-bar class="bar-positive">
+                <!--<ion-nav-back-button></ion-nav-back-button>-->
                 <ion-nav-buttons side="left">
-                    <button class="button button-icon button-bar-royal ion-navicon" menu-toggle="left"></button>
+                    <button class="button button-clear button-icon ion-navicon" style="color: black" menu-toggle="left"></button>
                 </ion-nav-buttons>
             </ion-nav-bar>
             <ion-nav-view></ion-nav-view>
         </ion-side-menu-content>
         <ion-side-menu side="left" id="side-menu21">
-            <ion-header-bar class="bar-stable">
+            <ion-header-bar class="bar-positive">
                 <div class="title">Menu</div>
             </ion-header-bar>
             <ion-content padding="false" class="side-menu-left has-header ">
@@ -78,16 +78,21 @@
                 <!--<ion-item menu-close ng-click="login()">-->
                   <!--Login-->
                 <!--</ion-item>-->
+                <img class="full-image" src="img/ionbrew_icon.png">
                 <ion-item menu-close href="#/Homepage"">
+                <i class="icon ion-home"></i>
                   Home
                 </ion-item>
                 <ion-item menu-close href="#/Beer">
+                  <i class="icon ion-beer"></i>
                   Beers
                 </ion-item>
                 <ion-item menu-close href="#/Brewery">
+                  <i class="icon ion-erlenmeyer-flask-bubbles"></i>
                   Brewery
                 </ion-item>
                 <ion-item menu-close href="#/Settings">
+                  <i class="icon ion-settings"></i>
                   Settings
                 </ion-item>
               </ion-list>
