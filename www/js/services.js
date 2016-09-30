@@ -105,4 +105,4 @@ angular.module('app.services', [])
 
     console.log(testFactory);
     return testFactory;
-  }]);
+  }])

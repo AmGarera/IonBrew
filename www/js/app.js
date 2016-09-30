@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services',])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services', 'ngStorage', 'indexedDB'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -21,3 +21,12 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
     }
   });
 })
+
+  .config(function ($indexedDBProvider) {
+    $indexedDBProvider
+      .connection('myFavorites')
+      .upgradeDatabase(1, function(event, db, tx){
+        var objStore = db.createObjectStore('favorites', {keyPath: 'drinkID'});
+        objStore.createIndex('drinkName', 'age', {unique: false});
+      });
+  })

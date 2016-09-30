@@ -32,6 +32,11 @@ angular.module('app.routes', ['ionicUIRouter'])
       url: "/DamGap",
       templateUrl: "templates/damgap.html",
       controller: "damgapCtrl"
+    })
+    .state("Favorites", {
+      url: "/Favorites",
+      templateUrl: "templates/favorites.html",
+      controller: "favoriteCtrl"
     });
 
   $urlRouterProvider.otherwise('/Homepage')

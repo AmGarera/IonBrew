@@ -7,12 +7,14 @@
           <!--Working Search-->
           <form ng-submit="fetchBeer()">
             <div class="item item-input-inset search" style="border: hidden">
-              <label class="item-input-wrapper search-text" style="background-color: white">
-                <input type="text" ng-model="beerNameSearch" placeholder="Find a Drink"/>
-              </label>
-              <button class="button button-positive button-fab search-button">
-                <i class="icon ion-search"></i>
-              </button>
+              <div class="search-box">
+                <label class="item-input-wrapper search-text">
+                  <input type="text" ng-model="beerNameSearch" placeholder="Find a Drink"/>
+                </label>
+                <button class="btn-circle btn-xl search-button">
+                  <i class="icon ion-search"></i>
+                </button>
+              </div>
           </div>
           </form>
 
@@ -25,29 +27,19 @@
           <div class="list" ng-show="beer">
 
             <!--Card Info-->
-            <div class="card roundedCorners" ng-repeat="beers in beer">
-              <div class="item item-text-wrap item-avatar">
-                <img ng-src="{{beers.labels.icon || './img/noImageFound.png'}}"><img>
-                <h2 ng-bind="beers.name"></h2>
-                <p ng-bind="beers.description || 'No Description Available'"></p>
+            <div class="card-cc" ng-repeat="beers in beer">
+              <div class="card-cc-header">
+                <img class="card-cc-image" ng-src="{{beers.labels.icon || './img/noImageFound.png'}}"><img>
+                <h2 class="card-cc-title" ng-bind="beers.name"></h2>
               </div>
+                <p ng-bind="beers.description || 'No Description Available'"></p>
 
               <!--Card Footer-->
-              <div class="item">
-                <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50">Save</button>
+              <div class="card-cc-action">
+                <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>
                 <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(beers.id)">About</button>
               </div>
             </div>
-
-            <!--Working code, do not delete. Saving for backup-->
-            <!--<a class="item item-thumbnail-left item-text-wrap" href="#" ng-repeat="beers in beer">-->
-              <!--<img ng-src="{{beers.labels.icon}}"><img>-->
-              <!--<h2 ng-bind="beers.name"></h2>-->
-              <!--<p ng-bind="beers.description"></p>-->
-              <!--<div class="item item-divider">-->
-                <!--<button class="button button-clear icon-left ion-star button-positive">Favorite</button>-->
-              <!--</div>-->
-            <!--</a>-->
           </div>
 
       <script id="single-beer.html" type="text/ng-template">

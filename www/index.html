@@ -18,7 +18,7 @@
 
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="lib/ionic/css/ionic.material.min.css" rel="stylesheet">
+    <link href="css/material.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <style type="text/css">
       .platform-ios .manual-ios-statusbar-padding{
@@ -51,9 +51,10 @@
 
     <script src="js/services.js"></script>
 
-
-
     <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
+
+    <script src="lib/ngStorage.min.js"></script>
+    <script src="lib/angular-indexed-db.js"></script>
 
 
   </head>
@@ -90,6 +91,10 @@
                 <ion-item menu-close href="#/Brewery">
                   <i class="icon ion-erlenmeyer-flask-bubbles"></i>
                   Brewery
+                </ion-item>
+                <ion-item menu-close href="#/Favorites">
+                  <i class="icon ion-bookmark"></i>
+                  Favorites
                 </ion-item>
                 <ion-item menu-close href="#/Settings">
                   <i class="icon ion-settings"></i>

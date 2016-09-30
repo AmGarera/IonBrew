@@ -1,0 +1,63 @@
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+.card-cc {
+  position: relative;
+  margin: 0.5rem 0 1rem 0;
+  background-color: #fff;
+  transition: box-shadow .25s;
+  border-radius: 15px;
+  padding:5px;
+}
+.card-cc-header{
+  display:flex;
+  align-items:center;
+  padding: 5px;
+}
+
+.card-cc-image {
+  width:50px;
+  height:50px;
+  border-radius: 25px;
+}
+
+.card-cc-title {
+  vertical-align: middle;
+
+}
+
+.card-cc-content{
+  padding: 10px !important;
+}
+
+.card-cc-action {
+  display:flex;
+  align-items:center;
+  padding: 10px;
+}
+
+
+

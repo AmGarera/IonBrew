@@ -1,5 +1,4 @@
-angular.module('app.controllers', [])
-
+angular.module('app.controllers', ['ngStorage', 'indexedDB'])
 
   .controller('homeCtrl', ['$scope', '$stateParams', 'TestingFactory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -41,11 +40,11 @@ angular.module('app.controllers', [])
 
     }])
 
-  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicModal",
+  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicModal", "$indexedDB",
     // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicModal) {
+    function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicModal, $indexedDB) {
       console.log("Inside Beer Controller");
 
       $scope.fetchBeer = function () {
@@ -139,6 +138,29 @@ angular.module('app.controllers', [])
       })
 
 
+
+      $scope.saveFavorite = function (id, name) {
+        console.log("Inside saveFavorites Function");
+        console.log("DrinkID = "  + id);
+        console.log("DrinkName = "  + name);
+
+        $indexedDB.openStore('favorites', function(store){
+          // single item
+          store.insert({"drinkID": id, "drinkName": name}).then(function (e) {
+            // do something
+          });
+        });
+
+        // $localStorage.savedDrinks = [
+        //   {
+        //     name: name,
+        //     id: id
+        //   }
+        // ];
+
+      }
+
+
     }])
 
   .controller('breweryCtrl', ['$scope', '$stateParams', "TestingFactory", // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -184,6 +206,14 @@ angular.module('app.controllers', [])
     }])
 
   .controller('damgapCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function ($scope, $stateParams) {
+
+
+    }])
+
+  .controller('favoriteCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function ($scope, $stateParams) {
