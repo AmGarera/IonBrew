@@ -1,11 +1,42 @@
 angular.module('app.controllers', [])
 
 
-  .controller('homeCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('homeCtrl', ['$scope', '$stateParams', 'TestingFactory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams) {
+    function ($scope, $stateParams, TestingFactory) {
       console.log("Inside Home Controller");
+
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+      function onSuccess(position) {
+        console.log('Latitude: '          + position.coords.latitude          + '\n' +
+          'Longitude: '         + position.coords.longitude         + '\n' +
+          'Altitude: '          + position.coords.altitude          + '\n' +
+          'Accuracy: '          + position.coords.accuracy          + '\n' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+          'Heading: '           + position.coords.heading           + '\n' +
+          'Speed: '             + position.coords.speed             + '\n' +
+          'Timestamp: '         + position.timestamp                + '\n');
+
+        $scope.latitude = position.coords.latitude;
+        $scope.longitude = position.coords.longitude;
+
+      }
+
+      // onError Callback receives a PositionError object
+      //
+      function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+      }
+
+
+
+      // TestingFactory.getNearby(position.coords.latitude, position.coords.longitude)
+      // {
+      //
+      // }
 
 
     }])
@@ -17,25 +48,6 @@ angular.module('app.controllers', [])
     function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicModal) {
       console.log("Inside Beer Controller");
 
-      // function getBeers() {
-      //   TestingFactory.getBeer($scope.beerNameSearch)
-      //     .then(function (response) {
-      //       $scope.beer = response.data;
-      //       console.log(response.data.data);
-      //     }, function (error) {
-      //       $scope.status = "Unable to Load " + error.message;
-      //       }
-      //     )
-      //
-      // }
-
-      // //Test function to make sure its calling the data from the textbox
-      // $scope.testFunction = function () {
-      //   console.log("Test Message");
-      //   console.log($scope.beerNameSearch)
-      // };
-      //
-      //Calls beer service and passes in the data from the textbox
       $scope.fetchBeer = function () {
         $scope.beerNameSearch;
         console.log("BeerNameSearch = "  + $scope.beerNameSearch);

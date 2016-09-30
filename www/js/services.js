@@ -95,6 +95,10 @@ angular.module('app.services', [])
         }
       );
     };
+
+    // testFactory.getNearby = function (lat, long) {
+    //   return $http.get(url + "search/geo/" + apiKey + "point?lat=" + lat + "&lng=-" + long)
+    // }
     // testFactory.actuallyGetBeer = function () {
     //   return testFactory.data
     // }
