@@ -3,33 +3,64 @@
       <div ng-controller="breweryCtrl">
         <form id="brewery-form4" class="list" ng-submit="fetchBrews()">
 
-          <div class="card">
-            <div class="item item-input-inset">
-              <label class="item-input-wrapper">
-                <input type="text" ng-model="brewNameSearch" placeholder="Search for beer"/>
+          <div class="item item-input-inset search" style="border: hidden">
+            <div class="search-box">
+              <label class="item-input-wrapper search-text">
+                <input type="text" ng-model="brewNameSearch" placeholder="Find a Brewery"/>
               </label>
-              <button type="submit" class="button button-small button-clear button-icon icon ion-search">
+              <button class="btn-circle btn-xl search-button">
+                <i class="icon ion-search"></i>
               </button>
             </div>
           </div>
 
         </form>
+
+        <!--<div ng-show="brew == undefined" class="card-cc">-->
+          <!--<div class="card-cc-header">-->
+            <!--<h2 class="card-cc-title" style="color: red">No Brewerys Available</h2>-->
+          <!--</div>-->
+          <!--<p>Please Search Again</p>-->
+        <!--</div>-->
+
+        <div>
+          <!--Around You Card List-->
+          <div class="list" ng-show="location" ng-hide="brew">
+
+            <!--Card Info-->
+            <div class="card-cc" ng-repeat="brewLoc in location">
+              <div class="card-cc-header">
+                <img class="card-cc-image" ng-src="{{brewLoc.brewery.images.medium || './img/noImageFound.png'}}"><img>
+                <h2 class="card-cc-title" ng-bind="brewLoc.brewery.name"></h2>
+              </div>
+              <p ng-bind="brewLoc.locality"></p><p ng-bind="brewLoc.region"></p>
+              <p ng-bind="brewLoc.brewery.description || 'No Description Available'"></p>
+              <p ng-bind="brewLoc.website || 'No Website Available'"></p>
+
+              <!--Card Footer-->
+              <div class="card-cc-action">
+                <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>
+                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(beers.id)">About</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div>
           <!--Card List-->
           <div class="list" ng-show="brew">
 
             <!--Card Info-->
-            <div class="card roundedCorners" ng-repeat="brews in brew">
-              <div class="item item-text-wrap item-avatar">
-                <img ng-src="{{brews.images.icon || '../img/acpgZJRSHyWpthjRdXxS_brewery.jpg'}}"><img>
-                <h2 ng-bind="brews.name"></h2>
-                <p ng-bind="brews.description || 'No Descrption Avalible'"></p>
+            <div class="card-cc" ng-repeat="brews in brew">
+              <div class="card-cc-header">
+                <img class="card-cc-image" ng-src="{{brews.images.icon || '../img/acpgZJRSHyWpthjRdXxS_brewery.jpg'}}"><img>
+                <h2 class="card-cc-title" ng-bind="brews.name"></h2>
               </div>
+              <p ng-bind="brews.description || 'No Descrption Avalible'"></p>
 
               <!--Card Footer-->
-              <div class="item">
-                <button class="button button-clear subdued icon-left ion-star button-positive col col-50">Save</button>
-                <button class="button button-clear subdued icon-left ion-information-circled button-positive col col-50 ">About</button>
+              <div class="card-cc-action">
+                <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>
+                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(beers.id)">About</button>
               </div>
             </div>
 

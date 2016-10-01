@@ -97,14 +97,15 @@ angular.module('app.services', [])
       );
     };
 
-    // testFactory.getNearby = function (lat, long) {
-    //   return $http.get(url + "search/geo/" + apiKey + "point?lat=" + lat + "&lng=-" + long)
-    // }
-    // testFactory.actuallyGetBeer = function () {
-    //   return testFactory.data
-    // }
+    testFactory.getNearby = function (lat, long) {
+      console.log(url + "search/geo/point/" + apiKey + "&lat=" + lat + "&lng=" + long);
+      return $http.get(url + "search/geo/point/" + apiKey + "&lat=" + lat + "&lng=" + long).success(function (data) {
+      });
+    };
+    testFactory.actuallyGetBeer = function () {
+      return testFactory.data
+    };
 
-    console.log("End Test Factory");
     console.log(testFactory);
     return testFactory;
   }]);

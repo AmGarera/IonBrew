@@ -21,6 +21,14 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
         $scope.latitude = position.coords.latitude;
         $scope.longitude = position.coords.longitude;
 
+        TestingFactory.getNearby(position.coords.latitude, position.coords.longitude)
+          .then( function (response) {
+            console.log("I just go the brews from the loaction");
+            $scope.location = response.data.data;
+            console.log($scope.location)
+          })
+
+
       }
 
       // onError Callback receives a PositionError object
@@ -29,14 +37,6 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
         alert('code: '    + error.code    + '\n' +
           'message: ' + error.message + '\n');
       }
-
-
-
-      // TestingFactory.getNearby(position.coords.latitude, position.coords.longitude)
-      // {
-      //
-      // }
-
 
     }])
 
@@ -75,9 +75,6 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
                 console.log($scope.beer.id);
                 // onBeer(beerData)
               console.log("beerData" + beerData);
-              // if ($scope.beer === undefined) {
-              //   console.log("Nothing Available")
-              // }
 
               }, function (error) {
                 $scope.status = "Unable to Load " + error.message;
@@ -175,6 +172,38 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
     function ($scope, $stateParams, TestingFactory) {
 
       console.log("Inside Brewery Controller");
+
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+      function onSuccess(position) {
+        console.log('Latitude: '          + position.coords.latitude          + '\n' +
+          'Longitude: '         + position.coords.longitude         + '\n' +
+          'Altitude: '          + position.coords.altitude          + '\n' +
+          'Accuracy: '          + position.coords.accuracy          + '\n' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+          'Heading: '           + position.coords.heading           + '\n' +
+          'Speed: '             + position.coords.speed             + '\n' +
+          'Timestamp: '         + position.timestamp                + '\n');
+
+        $scope.latitude = position.coords.latitude;
+        $scope.longitude = position.coords.longitude;
+
+        TestingFactory.getNearby(position.coords.latitude, position.coords.longitude)
+          .then( function (response) {
+            console.log("I just go the brews from the loaction");
+            $scope.location = response.data.data;
+            console.log($scope.location)
+          })
+
+
+      }
+
+      // onError Callback receives a PositionError object
+      //
+      function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+      }
 
       $scope.fetchBrews = function () {
         $scope.brewNameSearch;
