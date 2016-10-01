@@ -67,12 +67,18 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
           TestingFactory.getBrews($scope.beerNameSearch, type)
             .then( function (response) {
               $scope.beer = response.data.data;
+              // console.log($scope.beer);
               $ionicLoading.hide();
               var beerData= response.data.data;
               console.log($scope.beerNameSearch)
                 console.log($scope.beer);
                 console.log($scope.beer.id);
                 // onBeer(beerData)
+              console.log("beerData" + beerData);
+              // if ($scope.beer === undefined) {
+              //   console.log("Nothing Available")
+              // }
+
               }, function (error) {
                 $scope.status = "Unable to Load " + error.message;
               }
@@ -139,26 +145,26 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
 
 
 
-      $scope.saveFavorite = function (id, name) {
-        console.log("Inside saveFavorites Function");
-        console.log("DrinkID = "  + id);
-        console.log("DrinkName = "  + name);
-
-        $indexedDB.openStore('favorites', function(store){
-          // single item
-          store.insert({"drinkID": id, "drinkName": name}).then(function (e) {
-            // do something
-          });
-        });
-
-        // $localStorage.savedDrinks = [
-        //   {
-        //     name: name,
-        //     id: id
-        //   }
-        // ];
-
-      }
+      // $scope.saveFavorite = function (id, name) {
+      //   console.log("Inside saveFavorites Function");
+      //   console.log("DrinkID = "  + id);
+      //   console.log("DrinkName = "  + name);
+      //
+      //   $indexedDB.openStore('favorites', function(store){
+      //     // single item
+      //     store.insert({"drinkID": id, "drinkName": name}).then(function (e) {
+      //       // do something
+      //     });
+      //   });
+      //
+      //   // $localStorage.savedDrinks = [
+      //   //   {
+      //   //     name: name,
+      //   //     id: id
+      //   //   }
+      //   // ];
+      //
+      // }
 
 
     }])

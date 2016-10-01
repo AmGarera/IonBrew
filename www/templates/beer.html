@@ -18,9 +18,12 @@
           </div>
           </form>
 
-          <!--<div ng-hide="beer" class="text-center">-->
-            <!--<ion-spinner icon="android"></ion-spinner>-->
-          <!--</div>-->
+          <div ng-show="beer == undefined" class="card-cc">
+            <div class="card-cc-header">
+              <h2 class="card-cc-title" style="color: red">No Beers Available</h2>
+            </div>
+            <p>Please Search Again</p>
+          </div>
 
 
           <!--Card List-->
@@ -42,6 +45,7 @@
             </div>
           </div>
 
+          <!--About Beer Modal-->
       <script id="single-beer.html" type="text/ng-template">
         <ion-modal-view>
           <ion-content>
