@@ -37,7 +37,12 @@ angular.module('app.routes', ['ionicUIRouter'])
       url: "/Favorites",
       templateUrl: "templates/favorites.html",
       controller: "favoriteCtrl"
-    });
+    })
+    .state("Suggestions", {
+    url: "/Suggestions",
+    templateUrl: "templates/suggestions.html",
+    controller: "SuggestionsCtrl"
+  });;
 
   $urlRouterProvider.otherwise('/Homepage')
 

@@ -23,30 +23,27 @@
           <!--<p>Please Search Again</p>-->
         <!--</div>-->
 
-        <div>
-          <!--Around You Card List-->
+          <!--Nearby Card List-->
           <div class="list" ng-show="location" ng-hide="brew">
 
             <!--Card Info-->
             <div class="card-cc" ng-repeat="brewLoc in location">
               <div class="card-cc-header">
-                <img class="card-cc-image" ng-src="{{brewLoc.brewery.images.medium || './img/noImageFound.png'}}"><img>
+                <img class="card-cc-image" ng-src="{{brewLoc.brewery.images.icon || './img/noImageFound.png'}}"><img>
                 <h2 class="card-cc-title" ng-bind="brewLoc.brewery.name"></h2>
               </div>
-              <p ng-bind="brewLoc.locality"></p><p ng-bind="brewLoc.region"></p>
+              <p>{{brewLoc.locality}}, {{brewLoc.region}}  {{brewLoc.postalCode}}</p>
+              <p>{{brewLoc.hoursOfOperation}}</p>
               <p ng-bind="brewLoc.brewery.description || 'No Description Available'"></p>
-              <p ng-bind="brewLoc.website || 'No Website Available'"></p>
 
               <!--Card Footer-->
               <div class="card-cc-action">
                 <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>
-                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(beers.id)">About</button>
+                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(brewLoc.breweryId)">About</button>
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          <!--Card List-->
+          <!-- Search Card List-->
           <div class="list" ng-show="brew">
 
             <!--Card Info-->
@@ -55,27 +52,46 @@
                 <img class="card-cc-image" ng-src="{{brews.images.icon || '../img/acpgZJRSHyWpthjRdXxS_brewery.jpg'}}"><img>
                 <h2 class="card-cc-title" ng-bind="brews.name"></h2>
               </div>
+              <p>{{brews.website}}</p>
               <p ng-bind="brews.description || 'No Descrption Avalible'"></p>
 
               <!--Card Footer-->
               <div class="card-cc-action">
                 <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>
-                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(beers.id)">About</button>
+                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(brews.id)">About</button>
               </div>
             </div>
 
-            <!--Working code, do not delete. Saving for backup-->
-            <!--<a class="item item-thumbnail-left item-text-wrap" href="#" ng-repeat="beers in beer">-->
-            <!--<img ng-src="{{beers.labels.icon}}"><img>-->
-            <!--<h2 ng-bind="beers.name"></h2>-->
-            <!--<p ng-bind="beers.description"></p>-->
-            <!--<div class="item item-divider">-->
-            <!--<button class="button button-clear icon-left ion-star button-positive">Favorite</button>-->
-            <!--</div>-->
-            <!--</a>-->
-
           </div>
-        </div>
+
+
+
+        <!--About Beer Modal-->
+        <script id="single-brew.html" type="text/ng-template">
+          <ion-modal-view>
+            <ion-content>
+              <button class="button button-clear button-assertive" ng-click="closeModal()">
+                Close
+              </button>
+
+              <div class="item item-avatar">
+                <img ng-src="{{singlebrew.images.icon || './img/noImageFound.png'}}">
+                <h2>{{singlebrew.name}}</h2>
+                <p ng-show="singlebrew.established">Established: {{singlebrew.established}}</p>
+                <p ng-show="singlebrew.website"> Website: {{singlebrew.website}}</p>
+              </div>
+
+              <div class="item item-body">
+                <img class="full-image" ng-show="singlebrew.labels.medium" ng-src="{{singlebrew.labels.medium}}">
+                <p>
+                  {{singlebrew.description || 'No Description Available'}}
+                </p>
+              </div>
+
+
+            </ion-content>
+          </ion-modal-view>
+        </script>
       </div>
     </ion-content>
 </ion-view>

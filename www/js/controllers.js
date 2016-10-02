@@ -1,43 +1,20 @@
 angular.module('app.controllers', ['ngStorage', 'indexedDB'])
 
-  .controller('homeCtrl', ['$scope', '$stateParams', 'TestingFactory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('homeCtrl', ['$scope', '$stateParams', 'TestingFactory',"GeolocationService",// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, TestingFactory) {
+    function ($scope, $stateParams, TestingFactory, geolocation) {
       console.log("Inside Home Controller");
 
-      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+      $scope.position = null;
+      $scope.message = "Determining gelocation...";
 
-      function onSuccess(position) {
-        console.log('Latitude: '          + position.coords.latitude          + '\n' +
-          'Longitude: '         + position.coords.longitude         + '\n' +
-          'Altitude: '          + position.coords.altitude          + '\n' +
-          'Accuracy: '          + position.coords.accuracy          + '\n' +
-          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-          'Heading: '           + position.coords.heading           + '\n' +
-          'Speed: '             + position.coords.speed             + '\n' +
-          'Timestamp: '         + position.timestamp                + '\n');
-
-        $scope.latitude = position.coords.latitude;
-        $scope.longitude = position.coords.longitude;
-
-        TestingFactory.getNearby(position.coords.latitude, position.coords.longitude)
-          .then( function (response) {
-            console.log("I just go the brews from the loaction");
-            $scope.location = response.data.data;
-            console.log($scope.location)
-          })
-
-
-      }
-
-      // onError Callback receives a PositionError object
-      //
-      function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
-      }
-
+      geolocation().then(function (position) {
+        $scope.position = position;
+        console.log($scope.position)
+      }, function (reason) {
+        $scope.message = "Could not be determined."
+      });
     }])
 
   .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicModal", "$indexedDB",
@@ -140,8 +117,6 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
         // Execute action
       })
 
-
-
       // $scope.saveFavorite = function (id, name) {
       //   console.log("Inside saveFavorites Function");
       //   console.log("DrinkID = "  + id);
@@ -166,44 +141,30 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
 
     }])
 
-  .controller('breweryCtrl', ['$scope', '$stateParams', "TestingFactory", // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('breweryCtrl', ['$scope', '$stateParams', "$ionicLoading", "$ionicModal", "TestingFactory", "GeolocationService",
+    // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, TestingFactory) {
+    function ($scope, $stateParams, $ionicLoading, $ionicModal, TestingFactory, geolocation) {
 
       console.log("Inside Brewery Controller");
 
-      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+      $scope.position = null;
+      $scope.message = "Determining gelocation...";
 
-      function onSuccess(position) {
-        console.log('Latitude: '          + position.coords.latitude          + '\n' +
-          'Longitude: '         + position.coords.longitude         + '\n' +
-          'Altitude: '          + position.coords.altitude          + '\n' +
-          'Accuracy: '          + position.coords.accuracy          + '\n' +
-          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-          'Heading: '           + position.coords.heading           + '\n' +
-          'Speed: '             + position.coords.speed             + '\n' +
-          'Timestamp: '         + position.timestamp                + '\n');
+      geolocation().then(function (position) {
+        $scope.position = position;
+        console.log($scope.position);
 
-        $scope.latitude = position.coords.latitude;
-        $scope.longitude = position.coords.longitude;
-
-        TestingFactory.getNearby(position.coords.latitude, position.coords.longitude)
+        TestingFactory.getNearby($scope.position.coords.latitude, $scope.position.coords.longitude)
           .then( function (response) {
-            console.log("I just go the brews from the loaction");
             $scope.location = response.data.data;
             console.log($scope.location)
-          })
+          });
+      }, function (reason) {
+        $scope.message = "Could not be determined."
+      });
 
-
-      }
-
-      // onError Callback receives a PositionError object
-      //
-      function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
-      }
 
       $scope.fetchBrews = function () {
         $scope.brewNameSearch;
@@ -227,6 +188,62 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
 
         }
       };
+
+      $ionicModal.fromTemplateUrl('single-brew.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+        hardwareBackButtonClose: true
+
+      }).then(function (modal) {
+        $scope.modal = modal;
+      });
+      $scope.openModal = function (id) {
+        $ionicLoading.show({
+          template: '<ion-spinner icon="android"></ion-spinner>',
+          // animation: 'fade-in',
+          showBackdrop: true
+          // maxWidth: 500
+          // showDelay: 100
+        });
+
+        var type = 'brewery';
+        console.log("Model Open");
+        console.log(id);
+        console.log(type);
+
+        getSingle();
+
+        function getSingle() {
+          $scope.single = {};
+          TestingFactory.getSingleBrew(id, type)
+            .then( function (response) {
+                var single = response.data.data;
+                $scope.singlebrew = response.data.data;
+                console.log(single);
+                $ionicLoading.hide();
+              }
+              , function (error) {
+                $scope.status = "Unable to Load " + error.message;
+              })
+        }
+        $scope.modal.show();
+      };
+      $scope.closeModal = function () {
+        console.log("Model Hidden")
+        $scope.modal.hide();
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function () {
+        $scope.modal.remove();
+      });
+      // Execute action on hide modal
+      $scope.$on('modal.hidden', function () {
+        // Execute action
+      });
+      // Execute action on remove modal
+      $scope.$on('modal.removed', function () {
+        // Execute action
+      })
 
 
     }])
@@ -256,17 +273,10 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
 
     }])
 
-  .controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('SuggestionsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function ($scope, $stateParams) {
 
-
-    }])
-
-  .controller('signupCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams) {
 
     }]);
