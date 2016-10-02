@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['ngStorage', 'indexedDB'])
+angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
 
   .controller('homeCtrl', ['$scope', '$stateParams', 'TestingFactory',"GeolocationService",// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -117,26 +117,26 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
         // Execute action
       })
 
-      // $scope.saveFavorite = function (id, name) {
-      //   console.log("Inside saveFavorites Function");
-      //   console.log("DrinkID = "  + id);
-      //   console.log("DrinkName = "  + name);
-      //
-      //   $indexedDB.openStore('favorites', function(store){
-      //     // single item
-      //     store.insert({"drinkID": id, "drinkName": name}).then(function (e) {
-      //       // do something
-      //     });
-      //   });
-      //
-      //   // $localStorage.savedDrinks = [
-      //   //   {
-      //   //     name: name,
-      //   //     id: id
-      //   //   }
-      //   // ];
-      //
-      // }
+      $scope.saveFavorite = function (id, name, style) {
+        console.log("Inside saveFavorites Function");
+        console.log("DrinkID = "  + id);
+        console.log("DrinkName = "  + name);
+
+        $indexedDB.openStore('favorites', function(store){
+          // single item
+          store.insert({"drinkID": id, "drinkName": name, "drinkStyle": style}).then(function (e) {
+            // do something
+          });
+        });
+
+        // $localStorage.savedDrinks = [
+        //   {
+        //     name: name,
+        //     id: id
+        //   }
+        // ];
+
+      }
 
 
     }])
@@ -248,12 +248,45 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
 
     }])
 
-  .controller('settingsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('settingsCtrl', ['$scope', '$stateParams', '$ionicPopup', '$indexedDB',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams) {
+    function ($scope, $ionicPopup, $timeout, $indexedDB) {
       console.log("Inside Settings Controller");
 
+      // $scope.resetFavs = function() {
+      //   var confirmPopup = $ionicPopup.confirm({
+      //     title: 'Consume Ice Cream',
+      //     template: 'Are you sure you want to eat this ice cream?'
+      //   });
+      //
+      //   confirmPopup.then(function(res) {
+      //     if(res) {
+      //       console.log('You are sure');
+      //     } else {
+      //       console.log('You are not sure');
+      //     }
+      //   });
+      // };
+
+      // $scope.resetFavs = function() {
+      //   var alertPopup = $ionicPopup.alert({
+      //     title: 'Don\'t eat that!',
+      //     template: 'It might taste good'
+      //   });
+      //   alertPopup.then(function(res) {
+      //     console.log('Thank you for not eating my delicious ice cream cone');
+      //   });
+      // };
+
+      $scope.resetFavs = function () {
+        $indexedDB.openStore('favorites', function(store){
+          store.clear().then(function(){
+            console.log("Favorites Cleared")
+            location.reload();
+          });
+        });
+      }
 
     }])
 
@@ -265,10 +298,97 @@ angular.module('app.controllers', ['ngStorage', 'indexedDB'])
 
     }])
 
-  .controller('favoriteCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('favoriteCtrl', ['$scope', '$stateParams', "$ionicLoading", "$ionicModal", 'TestingFactory', '$indexedDB',
+    // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams) {
+    function ($scope, $stateParams, $ionicLoading, $ionicModal, TestingFactory, $indexedDB) {
+
+      console.log("Inside favoriteCtrl");
+
+      $indexedDB.openStore('favorites', function(store){
+        store.getAll().then(function(beers) {
+          // Update scope
+          $scope.beers = beers;
+          console.log($scope.beers)
+        });
+      });
+
+      $scope.deleteFavorite = function (id) {
+        $indexedDB.openStore('favorites', function(store){
+          console.log(id);
+          store.delete(id).then(function(){
+            location.reload();
+          });
+        });
+      }
+
+      $scope.doRefresh = function() {
+        $indexedDB.openStore('favorites', function(store){
+          store.getAll().then(function(beers) {
+            // Update scope
+            $scope.beers = beers;
+            console.log($scope.beers)
+            $scope.$broadcast('scroll.refreshComplete');
+          });
+        });
+      };
+
+      $ionicModal.fromTemplateUrl('single-beer.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+        hardwareBackButtonClose: true
+
+      }).then(function (modal) {
+        $scope.modal = modal;
+      });
+      $scope.openModal = function (id) {
+        $ionicLoading.show({
+          template: '<ion-spinner icon="android"></ion-spinner>',
+          // animation: 'fade-in',
+          showBackdrop: true
+          // maxWidth: 500
+          // showDelay: 100
+        });
+
+        var type = "beer";
+        console.log("Model Open");
+        console.log(id);
+        console.log(type);
+
+        getSingle();
+
+        function getSingle() {
+          $scope.single = {};
+          TestingFactory.getSingleBrew(id, type)
+            .then( function (response) {
+                var single = response.data.data;
+                $scope.singlebeer = response.data.data;
+                console.log(single);
+                $ionicLoading.hide();
+              }
+              , function (error) {
+                $scope.status = "Unable to Load " + error.message;
+              })
+        }
+        $scope.modal.show();
+      };
+      $scope.closeModal = function () {
+        console.log("Model Hidden")
+        $scope.modal.hide();
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function () {
+        $scope.modal.remove();
+      });
+      // Execute action on hide modal
+      $scope.$on('modal.hidden', function () {
+        // Execute action
+      });
+      // Execute action on remove modal
+      $scope.$on('modal.removed', function () {
+        // Execute action
+      })
 
 
     }])

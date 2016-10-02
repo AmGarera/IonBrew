@@ -39,8 +39,18 @@
 
               <!--Card Footer-->
               <div class="card-cc-action">
-                <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>
-                <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(beers.id)">About</button>
+                <button class="button button-clear col col-50" ng-click="saveFavorite(beers.id, beers.name, beers.style.name)">
+                  <span class="mdc-text-deep-purple-600">
+                    <i class="icon ion-bookmark"></i>
+                    Save
+                  </span>
+                </button>
+                <button class="button button-clear subdued col col-50" ng-click="openModal(beers.id)">
+                  <span class="mdc-text-blue">
+                    <i class="icon ion-ios-information-outline"></i>
+                    About
+                  </span>
+                </button>
               </div>
             </div>
           </div>
