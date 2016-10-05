@@ -120,7 +120,7 @@ angular.module('app.services', [])
           deferred.reject(new Error("Geolocation is not supported"));
         });
       } else {
-        $cordovaGeoLocation.navigator.geolocation.getCurrentPosition(function (position) {
+        $cordovaGeoLocation.getCurrentPosition(function (position) {
           $rootScope.$apply(function() {
             deferred.resolve(position);
           });
