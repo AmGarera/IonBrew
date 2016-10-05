@@ -115,22 +115,16 @@ angular.module('app.services', [])
     return function () {
       var deferred = $q.defer();
 
-      if (!$window.navigator) {
-        $rootScope.$apply(function() {
-          deferred.reject(new Error("Geolocation is not supported"));
-        });
-      } else {
+      document.addEventListener("deviceready", onDeviceReady, false);
+      function onDeviceReady() {
+        console.log("navigator.geolocation works well");
         navigator.geolocation.getCurrentPosition(function (position) {
-          $rootScope.$apply(function() {
+          $rootScope.$apply(function () {
             deferred.resolve(position);
           });
-        }, function (error) {
-          $rootScope.$apply(function() {
-            deferred.reject(error);
-          });
-        });
+        })
       }
 
       return deferred.promise;
     }
-  }]);;
+  }]);
