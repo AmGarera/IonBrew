@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
 
-  .controller('homeCtrl', ['$scope', '$stateParams', 'TestingFactory',"GeolocationService",// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('homeCtrl', ['$scope', '$stateParams', 'TestingFactory', "GeolocationService",// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function ($scope, $stateParams, TestingFactory, geolocation) {
@@ -26,7 +26,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
 
       $scope.fetchBeer = function () {
         $scope.beerNameSearch;
-        console.log("BeerNameSearch = "  + $scope.beerNameSearch);
+        console.log("BeerNameSearch = " + $scope.beerNameSearch);
         type = 'beer';
 
         $ionicLoading.show({
@@ -42,16 +42,16 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
         function getBeers() {
           $scope.beer = {};
           TestingFactory.getBrews($scope.beerNameSearch, type)
-            .then( function (response) {
-              $scope.beer = response.data.data;
-              // console.log($scope.beer);
-              $ionicLoading.hide();
-              var beerData= response.data.data;
-              console.log($scope.beerNameSearch)
+            .then(function (response) {
+                $scope.beer = response.data.data;
+                // console.log($scope.beer);
+                $ionicLoading.hide();
+                var beerData = response.data.data;
+                console.log($scope.beerNameSearch)
                 console.log($scope.beer);
                 console.log($scope.beer.id);
                 // onBeer(beerData)
-              console.log("beerData" + beerData);
+                console.log("beerData" + beerData);
 
               }, function (error) {
                 $scope.status = "Unable to Load " + error.message;
@@ -88,16 +88,17 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
         function getSingle() {
           $scope.single = {};
           TestingFactory.getSingleBrew(id, type)
-            .then( function (response) {
-              var single = response.data.data;
+            .then(function (response) {
+                var single = response.data.data;
                 $scope.singlebeer = response.data.data;
                 console.log(single);
                 $ionicLoading.hide();
-            }
-            , function (error) {
-            $scope.status = "Unable to Load " + error.message;
-          })
+              }
+              , function (error) {
+                $scope.status = "Unable to Load " + error.message;
+              })
         }
+
         $scope.modal.show();
       };
       $scope.closeModal = function () {
@@ -119,10 +120,10 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
 
       $scope.saveFavorite = function (id, name, style) {
         console.log("Inside saveFavorites Function");
-        console.log("DrinkID = "  + id);
-        console.log("DrinkName = "  + name);
+        console.log("DrinkID = " + id);
+        console.log("DrinkName = " + name);
 
-        $indexedDB.openStore('favorites', function(store){
+        $indexedDB.openStore('favorites', function (store) {
           // single item
           store.insert({"drinkID": id, "drinkName": name, "drinkStyle": style}).then(function (e) {
             // do something
@@ -157,7 +158,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
         console.log($scope.position);
 
         TestingFactory.getNearby($scope.position.coords.latitude, $scope.position.coords.longitude)
-          .then( function (response) {
+          .then(function (response) {
             $scope.location = response.data.data;
             console.log($scope.location)
           });
@@ -168,7 +169,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
 
       $scope.fetchBrews = function () {
         $scope.brewNameSearch;
-        console.log("BrewNameSearch = "  + $scope.brewNameSearch);
+        console.log("BrewNameSearch = " + $scope.brewNameSearch);
 
         getBeers();
 
@@ -177,9 +178,9 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
           $scope.brew = {};
           TestingFactory.getBrews($scope.brewNameSearch, type)
 
-            .then( function (response) {
+            .then(function (response) {
                 $scope.brew = response.data.data;
-                var brewData= response.data.data;
+                var brewData = response.data.data;
                 console.log($scope.brew);
               }, function (error) {
                 $scope.status = "Unable to Load " + error.message;
@@ -216,7 +217,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
         function getSingle() {
           $scope.single = {};
           TestingFactory.getSingleBrew(id, type)
-            .then( function (response) {
+            .then(function (response) {
                 var single = response.data.data;
                 $scope.singlebrew = response.data.data;
                 console.log(single);
@@ -226,6 +227,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
                 $scope.status = "Unable to Load " + error.message;
               })
         }
+
         $scope.modal.show();
       };
       $scope.closeModal = function () {
@@ -280,8 +282,8 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
       // };
 
       $scope.resetFavs = function () {
-        $indexedDB.openStore('favorites', function(store){
-          store.clear().then(function(){
+        $indexedDB.openStore('favorites', function (store) {
+          store.clear().then(function () {
             console.log("Favorites Cleared")
             location.reload();
           });
@@ -306,8 +308,8 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
 
       console.log("Inside favoriteCtrl");
 
-      $indexedDB.openStore('favorites', function(store){
-        store.getAll().then(function(beers) {
+      $indexedDB.openStore('favorites', function (store) {
+        store.getAll().then(function (beers) {
           // Update scope
           $scope.beers = beers;
           console.log($scope.beers)
@@ -315,17 +317,17 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
       });
 
       $scope.deleteFavorite = function (id) {
-        $indexedDB.openStore('favorites', function(store){
+        $indexedDB.openStore('favorites', function (store) {
           console.log(id);
-          store.delete(id).then(function(){
+          store.delete(id).then(function () {
             location.reload();
           });
         });
       }
 
-      $scope.doRefresh = function() {
-        $indexedDB.openStore('favorites', function(store){
-          store.getAll().then(function(beers) {
+      $scope.doRefresh = function () {
+        $indexedDB.openStore('favorites', function (store) {
+          store.getAll().then(function (beers) {
             // Update scope
             $scope.beers = beers;
             console.log($scope.beers)
@@ -361,7 +363,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
         function getSingle() {
           $scope.single = {};
           TestingFactory.getSingleBrew(id, type)
-            .then( function (response) {
+            .then(function (response) {
                 var single = response.data.data;
                 $scope.singlebeer = response.data.data;
                 console.log(single);
@@ -371,6 +373,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
                 $scope.status = "Unable to Load " + error.message;
               })
         }
+
         $scope.modal.show();
       };
       $scope.closeModal = function () {
