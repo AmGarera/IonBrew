@@ -126,7 +126,8 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
         $indexedDB.openStore('favorites', function (store) {
           // single item
           store.insert({"drinkID": id, "drinkName": name, "drinkStyle": style}).then(function (e) {
-            // do something
+
+
           });
         });
 
