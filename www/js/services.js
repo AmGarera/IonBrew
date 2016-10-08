@@ -1,4 +1,4 @@
-angular.module('app.services', [])
+angular.module('app.services', ['ionic.native'])
 
 
   .factory('BeerFactory', ['$http', function($http){
@@ -111,19 +111,19 @@ angular.module('app.services', [])
   }])
 
 
-  .factory("GeolocationService", ['$q', '$window', '$rootScope', function ($q, $window, $rootScope) {
+  .factory("GeolocationService", ['$q', '$window', '$rootScope', "$cordovaGeolocation", '$ionicPlatform', function ($q, $window, $rootScope, $cordovaGeolocation, $ionicPlatform) {
     return function () {
       var deferred = $q.defer();
 
-      document.addEventListener("deviceready", onDeviceReady, false);
-      function onDeviceReady() {
+      $ionicPlatform.ready(function () {
         console.log("navigator.geolocation works well");
-        navigator.geolocation.getCurrentPosition(function (position) {
+        $cordovaGeolocation.getCurrentPosition(function (position) {
           $rootScope.$apply(function () {
             deferred.resolve(position);
           });
         })
-      }
+      });
+
 
       return deferred.promise;
     }

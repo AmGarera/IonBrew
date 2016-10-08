@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB'])
+angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB', 'ionic.native'])
 
   .controller('homeCtrl', ['$scope', '$stateParams', 'TestingFactory', "GeolocationService",// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
