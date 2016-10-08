@@ -11,7 +11,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB', 'ionic.nat
 
       geolocation().then(function (position) {
         $scope.position = position;
-        console.log($scope.position)
+        console.log("The Location", $scope.position)
       }, function (reason) {
         $scope.message = "Could not be determined."
       });

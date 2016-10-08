@@ -117,13 +117,14 @@ angular.module('app.services', ['ionic.native'])
 
       $ionicPlatform.ready(function () {
         console.log("navigator.geolocation works well");
-        $cordovaGeolocation.getCurrentPosition(function (position) {
-          $rootScope.$apply(function () {
-            deferred.resolve(position);
-          });
-        })
+        $cordovaGeolocation.getCurrentPosition()
+          .then(
+            function (res) {
+              console.log("Gotten Location", res);
+              deferred.resolve(res)
+            }
+          )
       });
-
 
       return deferred.promise;
     }
