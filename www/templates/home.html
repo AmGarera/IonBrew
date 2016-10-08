@@ -1,10 +1,27 @@
 <ion-view title="Home" id="page2">
-    <ion-content padding="true" class="has-header">
-      <p>Lat: {{position.coords.latitude}} Long: {{position.coords.longitude}}</p>
-      <p>AtomBrew is an app search using BreweryDB with the Ionic and Angular JS framework.</p>
-      <img class="full-image" src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png">
+    <ion-content padding="false" class="has-header">
 
-
+      <ion-slides options="options" slider="data.slider">
+        <ion-slide-page class="mdc-bg-grey-600 mdc-text-white-darker all-padding">
+          <h1 class="mdc-text-white-darker">AtomBrew</h1>
+          <p>AtomBrew is an app search using BreweryDB with the Ionic and Angular JS framework.</p>
+          <br/>
+          <h3 class="mdc-text-white-darker">Swype right to get started!</h3>
+          <img class="full-image" src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png">
+        </ion-slide-page>
+        <ion-slide-page class="box mdc-bg-teal-A200 mdc-text-white-darker all-padding">
+          <h1 class="mdc-text-white-darker">Beers</h1>
+          <p>There is a great selection of beer on tap. Tap your favorite to add them to your favorites list</p>
+        </ion-slide-page>
+        <ion-slide-page class="mdc-bg-pink-A400 mdc-text-white-darker all-padding">
+          <h1 class="mdc-text-white-darker">Brews</h1>
+          <p>Lat: {{position.coords.latitude}} Long: {{position.coords.longitude}}</p>
+        </ion-slide-page>
+        <ion-slide-page class="mdc-bg-light-green-A400 mdc-text-white-darker all-padding">
+          <h1 class="mdc-text-white-darker">Brews</h1>
+          <p>Lat: {{position.coords.latitude}} Long: {{position.coords.longitude}}</p>
+        </ion-slide-page>
+      </ion-slides>
 
     </ion-content>
 </ion-view>

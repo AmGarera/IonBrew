@@ -17,11 +17,11 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB', 'ionic.nat
       });
     }])
 
-  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicModal", "$indexedDB",
+  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicModal", "$indexedDB", '$cordovaToast',
     // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicModal, $indexedDB) {
+    function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicModal, $indexedDB, $cordovaToast) {
       console.log("Inside Beer Controller");
 
       $scope.fetchBeer = function () {
@@ -125,7 +125,10 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'indexedDB', 'ionic.nat
 
         $indexedDB.openStore('favorites', function (store) {
           // single item
+          console.log(name + " added to favorites");
+          $cordovaToast.show(name + " added to favorites", "5000", 'center');
           store.insert({"drinkID": id, "drinkName": name, "drinkStyle": style}).then(function (e) {
+
 
 
           });
