@@ -102,6 +102,13 @@ angular.module('app.services', ['ionic.native'])
       return $http.get(url + "search/geo/point/" + apiKey + "&lat=" + lat + "&lng=" + long).success(function (data) {
       });
     };
+
+    testFactory.featured= function () {
+      console.log(url + "featured/" + apiKey);
+      return $http.get(url + "featured/" + apiKey).success(function (data) {
+      });
+    };
+
     testFactory.actuallyGetBeer = function () {
       return testFactory.data
     };

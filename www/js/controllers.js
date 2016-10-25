@@ -15,6 +15,13 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
       }, function (reason) {
         $scope.message = "Could not be determined."
       });
+
+      TestingFactory.featured()
+        .then(function (response){
+          $scope.featured = response.data.data;
+          console.log($scope.featured)
+        });
+
     }])
 
   .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicModal", "$indexedDB", '$cordovaToast', '$ionicPlatform',
