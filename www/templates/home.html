@@ -29,15 +29,17 @@
 
   <!--</ion-tabs>-->
 
-  <ion-content padding="false" class="has-header">
+  <ion-content padding="false" class="has-header mdc-bg-blue-grey-200" >
 
     <ion-slides options="options" slider="data.slider">
       <ion-slide-page class="mdc-bg-grey-600 mdc-text-white-darker all-padding">
-        <h1 class="mdc-text-white-darker">AtomBrew</h1>
-        <p>AtomBrew is an app search using BreweryDB with the Ionic and Angular JS framework.</p>
-        <br/>
-        <h3 class="mdc-text-white-darker">Swype right for this weeks featured beer and brewery</h3>
-        <img class="full-image" src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png">
+        <h1 id="header" class="mdc-text-white-darker">AtomBrew</h1>
+        <div id="content">
+          <p>Find new brewery's and beers</p>
+          <br/>
+          <h3 class="mdc-text-white-darker">Swipe right for this weeks featured beer and brewery</h3>
+        </div>
+        <img id="footer" class="full-image" src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png">
       </ion-slide-page>
       <ion-slide-page class="box mdc-bg-blue-500 mdc-text-white-darker all-padding">
         <h1 class="mdc-text-white-darker text-center">Featured Beer</h1>
@@ -45,8 +47,10 @@
         <div class="item item-avatar">
           <img ng-src="{{featured.beer.labels.icon || './img/noImageFound.png'}}">
           <h2>{{featured.beer.nameDisplay}}</h2>
+          <p ng-show="featured.beer.available.description">{{featured.beer.available.description}}</p>
           <p ng-show="featured.beer.abv">Alcohol Percent By Volume: {{featured.beer.abv}}%</p>
           <p ng-show="featured.beer.style.name"> Style: {{featured.beer.style.name}}</p>
+          <p ng-show="featured.beer.glass.name"> Best Served in: {{featured.beer.glass.name}}</p>
         </div>
 
         <div class="item item-body">
@@ -69,10 +73,16 @@
         </div>
 
         <div class="item item-body">
-          <!--<img class="full-image" ng-show="featured.brewery.labels.medium" ng-src="{{featured.brewery.labels.medium}}">-->
+          <!--<img class="full-image" ng-show="featured.brewery.images.squareLarge" ng-src="{{featured.brewery.images.squareLarge}}">-->
           <p>
             {{featured.brewery.description || 'No Description Available'}}
           </p>
+
+
+        </div>
+
+        <div>
+
         </div>
       </ion-slide-page>
 
