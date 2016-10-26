@@ -24,11 +24,11 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
 
     }])
 
-  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicModal", "$indexedDB", '$cordovaToast', '$ionicPlatform',
+  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicPopup", "$ionicModal", "$indexedDB", '$cordovaToast', '$ionicPlatform',
     // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicModal, $indexedDB, $cordovaToast, $ionicPlatform) {
+    function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicPopup, $ionicModal, $indexedDB, $cordovaToast, $ionicPlatform) {
       console.log("Inside Beer Controller");
 
       $scope.fetchBeer = function () {
@@ -134,23 +134,24 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
         console.log("DrinkID = " + id);
         console.log("DrinkName = " + name);
 
+        var alertPopup = $ionicPopup.alert({
+          title: name + ' Saved to Favorites'
+        });
+
+        alertPopup.then(function(res) {
+          console.log('Thank you for advice.');
+        });
+
+        // $cordovaToast.show(name + " added to favorites", "5000", 'center')
+
         $indexedDB.openStore('favorites', function (store) {
-          $cordovaToast.show(name + " added to favorites", "5000", 'center')
           // single item
+
           console.log(name + " added to favorites");
           store.insert({"drinkID": id, "drinkName": name, "drinkStyle": style}).then(function (e) {
 
-
-
           });
         });
-
-        // $localStorage.savedDrinks = [
-        //   {
-        //     name: name,
-        //     id: id
-        //   }
-        // ];
 
       }
 
