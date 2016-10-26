@@ -27,12 +27,27 @@
 
         </form>
 
-        <!--<div ng-show="brew == undefined" class="card-cc">-->
-          <!--<div class="card-cc-header">-->
-            <!--<h2 class="card-cc-title" style="color: red">No Brewerys Available</h2>-->
-          <!--</div>-->
-          <!--<p>Please Search Again</p>-->
-        <!--</div>-->
+        <div>
+          <div class="card-cc" ng-repeat="brewLoc in location">
+            <div class="card-cc-header">
+              <h2 class="card-cc-title">Re</h2>
+            </div>
+            <p>{{brewLoc.locality}}, {{brewLoc.region}}  {{brewLoc.postalCode}}</p>
+            <p>{{brewLoc.hoursOfOperation}}</p>
+            <p ng-bind="brewLoc.brewery.description || 'No Description Available'"></p>
+
+            <!--Card Footer-->
+            <div class="card-cc-action">
+              <!--<button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>-->
+              <button class="button button-clear button-positive subdued col col-50" ng-click="openModal(brewLoc.breweryId)">
+                  <span class="mdc-text-blue">
+                    <i class="icon ion-ios-information-outline"></i>
+                    About
+                  </span>
+              </button>
+            </div>
+          </div>
+        </div>
 
           <!--Nearby Card List-->
           <div class="list" ng-show="location" ng-hide="brew">
@@ -73,7 +88,7 @@
 
               <!--Card Footer-->
               <div class="card-cc-action">
-                <button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>
+                <!--<button class="button button-clear button-royal icon-left ion-bookmark button-calm-900 col col-50" ng-click="saveFavorite(beers.id, beers.name)">Save</button>-->
                 <button class="button button-clear button-positive subdued icon-left ion-ios-information-outline col col-50" ng-click="openModal(brews.id)">About</button>
               </div>
             </div>
@@ -102,6 +117,14 @@
                 <p>
                   {{singlebrew.description || 'No Description Available'}}
                 </p>
+
+                <h3>Items brewed by {{singlebrew.name}}</h3>
+                <ion-list>
+                  <ion-item ng-repeat="brewsBeer in brewBeer">
+                    {{brewsBeer.nameDisplay}}
+                  </ion-item>
+                </ion-list>
+
               </div>
 
 

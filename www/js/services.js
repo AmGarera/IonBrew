@@ -91,7 +91,7 @@ angular.module('app.services', ['ionic.native'])
     };
 
     testFactory.getSingleBrew = function (brewNameSearch, type) {
-      //console.log("getUrl = " + url + type + "/" + brewNameSearch + "/?" +  apiKey );
+      console.log("getUrl = " + url + type + "/" + brewNameSearch + "/" +  apiKey );
       return $http.get(url + type + "/" + brewNameSearch + "/" +  apiKey).success(function (data) {
         }
       );
@@ -108,6 +108,14 @@ angular.module('app.services', ['ionic.native'])
       return $http.get(url + "featured/" + apiKey).success(function (data) {
       });
     };
+
+    testFactory.getBrewBeer = function (brewNameSearch) {
+      console.log("getUrl = " + url + "brewery" + "/" + brewNameSearch + "/beers/" +  apiKey );
+      return $http.get(url + "brewery" + "/" + brewNameSearch + "/beers/" +  apiKey).success(function (data) {
+        }
+      );
+    };
+
 
     testFactory.actuallyGetBeer = function () {
       return testFactory.data

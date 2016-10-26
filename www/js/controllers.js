@@ -236,10 +236,19 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
                 var single = response.data.data;
                 $scope.singlebrew = response.data.data;
                 console.log(single);
-                $ionicLoading.hide();
+
+                TestingFactory.getBrewBeer(id)
+                  .then(function (response) {
+                    var brewBeer = response.data.data
+                    console.log(brewBeer)
+                    $scope.brewBeer = brewBeer
+
+                    $ionicLoading.hide();
+                  })
               }
               , function (error) {
                 $scope.status = "Unable to Load " + error.message;
+
               })
         }
 
