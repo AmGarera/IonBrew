@@ -247,8 +247,9 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
                   })
               }
               , function (error) {
+                console.log("Error" + error.message);
                 $scope.status = "Unable to Load " + error.message;
-
+                $scope.errorCard = "True";
               })
         }
 
