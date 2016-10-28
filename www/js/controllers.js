@@ -219,7 +219,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
               console.log($scope.singleb);
 
             var alertPopup = $ionicPopup.show({
-              template: '<h6>' +beerData.description+'</h6>',
+              template: '<p>' +beerData.description+'</p>',
               title: beerData.nameDisplay,
               subTitle: beerData.style.name,
               scope: $scope
