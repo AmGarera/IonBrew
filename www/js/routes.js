@@ -38,10 +38,10 @@ angular.module('app.routes', ['ionicUIRouter'])
       templateUrl: "templates/favorites.html",
       controller: "favoriteCtrl"
     })
-    .state("Suggestions", {
-    url: "/Suggestions",
-    templateUrl: "templates/suggestions.html",
-    controller: "SuggestionsCtrl"
+    .state("Random", {
+    url: "/Random",
+    templateUrl: "templates/random.html",
+    controller: "RandomCtrl"
   });;
 
   $urlRouterProvider.otherwise('/Homepage')

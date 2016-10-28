@@ -219,11 +219,11 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
               console.log($scope.singleb);
 
             var alertPopup = $ionicPopup.show({
-              template: '<p>' +beerData.description+'</p>',
+              template:'<p>' +beerData.description+'</p>',
               title: beerData.nameDisplay,
-              subTitle: beerData.style.name,
-              scope: $scope
+              subTitle: beerData.style.name
             });
+
 
             $scope.closepopup = function () {
               alertPopup.close()
@@ -463,7 +463,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
 
     }])
 
-  .controller('SuggestionsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('RandomCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function ($scope, $stateParams) {
