@@ -158,11 +158,11 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
 
     }])
 
-  .controller('breweryCtrl', ['$scope', '$stateParams', "$ionicLoading", "$ionicModal", "TestingFactory", "GeolocationService",
+  .controller('breweryCtrl', ['$scope', '$stateParams', "$ionicLoading", "$ionicModal", "$ionicPopup", "TestingFactory", "GeolocationService",
     // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, $ionicLoading, $ionicModal, TestingFactory, geolocation) {
+    function ($scope, $stateParams, $ionicLoading, $ionicModal, $ionicPopup, TestingFactory, geolocation) {
 
       console.log("Inside Brewery Controller");
 
@@ -205,6 +205,42 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
 
         }
       };
+
+      $scope.getsinglebeer = function (id) {
+        type = 'brewery';
+        console.log("Inside single beer");
+        console.log("id" + id);
+
+        TestingFactory.getSingleBrew(id, "beer")
+
+          .then(function (response) {
+              $scope.singleb = response.data.data;
+              var beerData = response.data.data;
+              console.log($scope.singleb);
+
+            var alertPopup = $ionicPopup.show({
+              template: '<h6>' +beerData.description+'</h6>',
+              title: beerData.nameDisplay,
+              subTitle: beerData.style.name,
+              scope: $scope
+            });
+
+            $scope.closepopup = function () {
+              alertPopup.close()
+            };
+
+            alertPopup.then(function(res) {
+              console.log('Thank you for advice.');
+            });
+
+            }, function (error) {
+              $scope.status = "Unable to Load " + error.message;
+            }
+          )
+
+
+      };
+
 
       $ionicModal.fromTemplateUrl('single-brew.html', {
         scope: $scope,
@@ -369,6 +405,7 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
 
       }).then(function (modal) {
         $scope.modal = modal;
+
       });
       $scope.openModal = function (id) {
         $ionicLoading.show({
@@ -417,8 +454,12 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
       // Execute action on remove modal
       $scope.$on('modal.removed', function () {
         // Execute action
-      })
+      });
 
+
+      $scope.holding = function () {
+        console.log("Please Hold")
+      }
 
     }])
 

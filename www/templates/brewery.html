@@ -27,7 +27,7 @@
 
         </form>
 
-        <div ng-show="bre == undefined" class="card-cc">
+        <div ng-show="brew == undefined" ng-hide="location" class="card-cc">
           <div class="card-cc-header">
             <h2 class="card-cc-title" style="color: red">No Brewerys Available</h2>
           </div>
@@ -106,8 +106,8 @@
 
                 <h3>Items brewed by {{singlebrew.name}}</h3>
                 <ion-list>
-                  <ion-item ng-repeat="brewsBeer in brewBeer">
-                    {{brewsBeer.nameDisplay}}
+                  <ion-item ng-repeat="brewsBeer in brewBeer" on-hold="getsinglebeer(brewsBeer.id)" on-release="closepopup()">
+                      {{brewsBeer.nameDisplay}}
                   </ion-item>
                 </ion-list>
 
@@ -117,6 +117,9 @@
             </ion-content>
           </ion-modal-view>
         </script>
+
+
+
       </div>
     </ion-content>
 </ion-view>
