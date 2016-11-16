@@ -84,22 +84,22 @@ angular.module('app.services', ['ionic.native'])
     var apiKey = '?key=62335776d75e185980011577ab2440a4';
     //Search call to the API
     testFactory.getBrews = function (brewNameSearch, type) {
-      console.log(url + search + apiKey + '&q=' + brewNameSearch + '&type=' + type);
-      return $http.get(url + search + apiKey + '&q=' + brewNameSearch + '&type=' + type).success(function (data) {
+      console.log(url + search + apiKey + '&q=' + brewNameSearch + '&type=' + type + "&hasLabels=Y");
+      return $http.get(url + search + apiKey + '&q=' + brewNameSearch + '&type=' + type + "&hasLabels=Y").success(function (data) {
         }
       );
     };
 
     testFactory.getSingleBrew = function (brewNameSearch, type) {
-      console.log("getUrl = " + url + type + "/" + brewNameSearch + "/" +  apiKey );
-      return $http.get(url + type + "/" + brewNameSearch + "/" +  apiKey).success(function (data) {
+      console.log("getUrl = " + url + type + "/" + brewNameSearch + "/" +  apiKey + "&hasLabels=Y" );
+      return $http.get(url + type + "/" + brewNameSearch + "/" +  apiKey + "&hasLabels=Y").success(function (data) {
         }
       );
     };
 
     testFactory.getNearby = function (lat, long) {
-      console.log(url + "search/geo/point/" + apiKey + "&lat=" + lat + "&lng=" + long);
-      return $http.get(url + "search/geo/point/" + apiKey + "&lat=" + lat + "&lng=" + long).success(function (data) {
+      console.log(url + "search/geo/point/" + apiKey + "&lat=" + lat + "&lng=" + long + "&hasLabels=Y");
+      return $http.get(url + "search/geo/point/" + apiKey + "&lat=" + lat + "&lng=" + long + "&hasLabels=Y").success(function (data) {
       });
     };
 
@@ -110,8 +110,8 @@ angular.module('app.services', ['ionic.native'])
     };
 
     testFactory.getBrewBeer = function (brewNameSearch) {
-      console.log("getUrl = " + url + "brewery" + "/" + brewNameSearch + "/beers/" +  apiKey );
-      return $http.get(url + "brewery" + "/" + brewNameSearch + "/beers/" +  apiKey).success(function (data) {
+      console.log("getUrl = " + url + "brewery" + "/" + brewNameSearch + "/beers/" +  apiKey + "&hasLabels=Y" );
+      return $http.get(url + "brewery" + "/" + brewNameSearch + "/beers/" +  apiKey + "&hasLabels=Y").success(function (data) {
         }
       );
     };
@@ -122,7 +122,7 @@ angular.module('app.services', ['ionic.native'])
     };
 
     testFactory.random = function (type) {
-      console.log("getUrl = " + url + "/" +  type + "/random" +  apiKey );
+      console.log("getUrl = " + url + "/" +  type + "/random" +  apiKey + "&hasLabels=Y" );
       return $http.get(url + "/" +  type + "/random/" +  apiKey + "&hasLabels=Y" ).success(function (data) {
         }
       );
