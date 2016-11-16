@@ -24,11 +24,11 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
 
     }])
 
-  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicPopup", "$ionicModal", "$indexedDB", '$cordovaToast', '$ionicPlatform',
+  .controller('beerCtrl', ["$scope", "BeerFactory", "BeerService", "TestingFactory", "$ionicLoading", "$ionicPopup", "$ionicModal", "$indexedDB", '$cordovaToast', '$ionicPlatform', '$ionicSideMenuDelegate',
     // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicPopup, $ionicModal, $indexedDB, $cordovaToast, $ionicPlatform) {
+    function ($scope, BeerFactory, BeerService, TestingFactory, $ionicLoading, $ionicPopup, $ionicModal, $indexedDB, $cordovaToast, $ionicPlatform, $ionicSideMenuDelegate) {
       console.log("Inside Beer Controller");
 
       $scope.fetchBeer = function () {
@@ -463,10 +463,47 @@ angular.module('app.controllers', ['ionic', 'ngStorage', 'ionic.native', 'indexe
 
     }])
 
-  .controller('RandomCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('RandomCtrl', ['$scope', '$stateParams', 'TestingFactory', '$ionicLoading', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams) {
+    function ($scope, $stateParams, TestingFactory, $ionicLoading) {
 
+      time = 0
+
+      $scope.getRandom = function () {
+        type = 'beer';
+        time = time + 1;
+        console.log(time)
+
+        $ionicLoading.show({
+          template: '<ion-spinner icon="android"></ion-spinner>',
+          // animation: 'fade-in',
+          showBackdrop: true
+          // maxWidth: 500
+          // showDelay: 100
+        });
+
+        getBeers();
+
+        function getBeers() {
+          $scope.beer = {};
+          TestingFactory.random(type)
+            .then(function (response) {
+                $scope.beer = response.data.data;
+                // console.log($scope.beer);
+                $ionicLoading.hide();
+                var beerData = response.data.data;
+                console.log($scope.beer);
+                console.log($scope.beer.id);
+                // onBeer(beerData)
+                console.log("beerData" + beerData);
+
+              }, function (error) {
+                $scope.status = "Unable to Load " + error.message;
+              }
+            )
+
+        }
+      };
 
     }]);

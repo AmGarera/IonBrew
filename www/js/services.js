@@ -121,6 +121,13 @@ angular.module('app.services', ['ionic.native'])
       return testFactory.data
     };
 
+    testFactory.random = function (type) {
+      console.log("getUrl = " + url + "/" +  type + "/random" +  apiKey );
+      return $http.get(url + "/" +  type + "/random/" +  apiKey + "&hasLabels=Y" ).success(function (data) {
+        }
+      );
+    };
+
     console.log(testFactory);
     return testFactory;
   }])
